@@ -1,0 +1,148 @@
+1. golang下载和配置
+    1.1 安装golang
+    下载地址:1. https://golang.org/dl/  2. https://golang.google.cn/dl/     （国内）
+    根据自己的电脑系统下载相应的golang安装包。
+    然后，一路默认安装即可。
+
+    1.2 配置环境变量
+    配置GOPATH、GOROOT、Path
+    GOPATH  e:\go （go代码目录，下有src,bin,pkg三个文件夹，需要自己创建）
+    GOROOT  c:\Users\XXX\go\bin （go的安装目录，下的bin文件夹）
+    Path    %GOPATH%\bin
+            %GOROOT%\bin
+
+    1.3一些go的命令
+    go run xxx.go
+    go build xxx.go 会生成一个xxx.exe文件（以windows系统为例）
+
+    GOOS=windows GOARCH=amd64 go build ./xxxx.go
+    编译成windows系统，64位的程序
+
+    GOOS=windows GOARCH=386 go build ./xxxx.go
+    编译成windows系统，32位的程序
+
+    GOOS=linux GOARCH=amd64 go build ./xxxx.go
+    编译成linux系统，64位的程序
+
+2. goland下载和配置
+    2.1 goland下载
+    https://www.jetbrains.com/go/nextversion/
+    下载goland，安装好后，需要激活。
+    EAP版可以不需要激活使用，但是先要注册jetbrains账号，用邮箱注册个账号后，登录即可使用。（注意：注册过程可能需要用到科学上网）
+
+    2.2 使用EAP版
+    进入goland后，settings - system settings - updates - check IDE update for :Early Access Program （todo： 貌似可以自己手动更新，待补充）
+
+    2.3 设置golang主题
+    settings-appearance-Theme: Darcula(推荐)
+
+    2.4 设置code主题
+    Settings-Editor-Scheme: Colorful Darcula
+
+    2.5 安装git插件
+        Settings - Plugins 搜索git install即可，重启goland生效
+
+    配置：
+
+3. git下载，安装，配置
+    3.1 下载并安装git
+        git官网：https://git-scm.com/downloads
+        一路默认安装
+
+    3.2 创建本地代码仓库
+        mkdir XXX
+
+    3.3 在仓库中，初始化仓库
+        git init
+        初始化后，会出现一个.git隐藏文件
+
+    3.4 配置name和邮箱
+        git config --global user.name "XXXX"
+        git config --global user.email "XXXXX" (要可接收的邮箱)
+        验证配置： git config --global --list 会出现已配置的内容。
+
+    3.5 git基本使用（后续继续补充）
+        clear 清屏
+        git status 显示仓库文件状态
+        git add file1 暂存文件1
+        git add . 添加所有文件为暂存
+        git commit -m "注释说明"    提交文件到仓库
+        git log 显示历史所有提交
+
+4. git连接github
+    4.1 注册github, 创建仓库：create a new repository (设置仓库名，一般使用免费的共有库)
+
+    4.2 创建好github上的代码库后，建议使用SSH协议建立与本地仓库的连接。
+
+    4.3 在本地仓库下，运行以下命令：
+        git remote add origin git@github.com:XXXX.git //在github仓库复制该命令
+        该命令是github仓库自动生成的。另外，origin可以自定义。
+        检测是否运行成功：输入 git remote 可以看到远程仓库的名字 -> origin 说明成功。
+
+    4.4 配置公钥
+        在git中输入： ssh-keygen -t rsa -C "xxx邮箱"
+        回车后，生成公私钥，也可以看到公私钥存放的目录。
+        继续回车，要求输入密码，不用管，继续回车2次，可以看到一个图标，就说明成功了。
+
+    4.5 复制公钥
+        进入公钥文件夹：如 cd xxx/.ssh
+        打开公钥文件：如 cat id_rsa.pub
+        复制公钥
+
+    4.6 进入github的setting-SSH and GPG keys
+        创建新的key： New SSH key
+        title可以不写
+        key中，粘贴公钥内容，让后点击Add SSH key
+
+    4.7 验证是否连接成功
+        git中输入：ssh -T git@github.com
+        显示输入yes或no，输入yes
+        显示成功通过验证，说明连接成功
+    4.8 首次git push
+        复制github上的首次push命令
+        git push -u origin main //这个不能用
+        error: src refspec main does not match any
+        error: failed to push some refs to 'github.com:XXX/learn.go.git'
+        参考解决方法：(我没试过)
+        https://blog.csdn.net/u014361280/article/details/109703556
+
+        我试了下面的：
+        git push -u origin master //依然可以使用，所以没有试上面的参考解决的方法。
+    注册好github，创建好仓库。
+
+        成功push后，刷新github仓库，就会看到同步的代码文件。
+
+    4.9 以后git push 即可
+
+
+
+5. 新接触到的东西
+    5.1 go mod
+        module learn.go
+
+        go 1.17
+
+    5.2 系统命令行    命令行快速入门：https://www.epubit.com/articleDetails?id=0d18a5156ef94987a072d53ebaee284a
+        windows 使用powershell
+            pwd: 打印工作目录
+            hostname: 计算机在网络中的名称
+            mkdir: 创建目录（创建文件夹）
+            cd: 更改目录
+            ls: 列出目录中的内容
+            rmdir: 删除目录
+            pushd: 推入目录
+            popd: 弹出目录
+            cp: 复制文件或目录
+            rebocopy: 更可靠的复制命令
+            mv: 移动文件或目录
+            more: 逐页查看文件
+            type: 打印整个文件
+            forfiles: 在一大堆文件上面运行一条命令
+            dir -r: 寻找文件
+            select-string: 在文件中查找内容
+            help: 阅读手册
+            helpctr: 寻找恰当的手册页面
+            echo: 打印一些参数
+            set: 导出\设定一个新的环境变量
+            exit: 退出shell
+            runas: 成为超级用户root （危险命令！）
