@@ -42,8 +42,6 @@
     2.5 安装git插件
         Settings - Plugins 搜索git install即可，重启goland生效
 
-    配置：
-
 3. git下载，安装，配置
     3.1 下载并安装git
         git官网：https://git-scm.com/downloads
@@ -113,7 +111,6 @@
         成功push后，刷新github仓库，就会看到同步的代码文件。
 
     4.9 以后git push 即可
-
 
 
 5. 新接触到的东西
