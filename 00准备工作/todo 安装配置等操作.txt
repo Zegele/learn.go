@@ -7,7 +7,7 @@
     1.2 配置环境变量
     配置GOPATH、GOROOT、Path
     GOPATH  e:\go （go代码目录，下有src,bin,pkg三个文件夹，需要自己创建）
-    GOROOT  c:\Users\XXX\go\bin （go的安装目录，下的bin文件夹）
+    GOROOT  c:\Users\XXX\go （go的安装目录，下的bin文件夹）
     Path    %GOPATH%\bin
             %GOROOT%\bin
 
