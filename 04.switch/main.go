@@ -14,7 +14,7 @@ func main() {
 	case 200:
 		fmt.Println("下个馆子")
 		if busy {
-			break //立刻结束循环
+			break //立刻结束
 		} else {
 			fmt.Println("再吃点零食")
 		}
