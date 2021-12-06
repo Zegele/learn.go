@@ -42,6 +42,9 @@
     2.5 安装git插件
         Settings - Plugins 搜索git install即可，重启goland生效
 
+    2.6 设置tab（————）或空格（...）的标志
+        Setting - Editor - General - Appearance - Show Whitespace 全选
+
 3. git下载，安装，配置
     3.1 下载并安装git
         git官网：https://git-scm.com/downloads

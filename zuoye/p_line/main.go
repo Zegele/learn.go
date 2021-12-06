@@ -10,6 +10,7 @@ type Point struct {
 }
 
 func main() {
+	//设置点
 	var a, b, c, d Point
 
 	fmt.Print("请输入A点坐标(x, y)：")
@@ -39,16 +40,18 @@ func main() {
 	fmt.Println(c)
 
 	fmt.Print("请输入D点坐标(x,y):")
-
 	for {
 		fmt.Scanf("%f,%f", &d.x, &d.y)
 		if ((d.x != c.x) || (d.x != b.x) || (d.x != a.x)) && ((d.y != c.y) || (d.y != b.y) || (d.y != a.y)) {
-			fmt.Scanf("%f,%f", &d.x, &d.y) //为什么第一个会被跳过？
+			//fmt.Scanf("%f,%f\n", &d.x, &d.y) //为什么第一个会被跳过？ 估计是goland原因，因为git中运行是没问题的。
 			break
+		} else {
+			fmt.Print("有重复的点，请重新输入D点坐标：")
 		}
 	}
 	fmt.Println(d)
 
+	//组成直线
 	fmt.Print("你想让A点与B、C、D 中的哪个点组成直线？") //选一个点与A组成直线，另两个点组成一条直线
 	var k1, k2 float64
 	var d1, d2 float64
@@ -56,15 +59,15 @@ func main() {
 	var selectP string
 	for {
 		fmt.Scanln(&selectP)
-		if selectP == "B" || selectP == "b" {
+		if selectP == "B" || selectP == "b" { // line(ab) line(cd)
 			k1, d1, s1 = line(a, b)
 			k2, d2, s2 = line(c, d)
 			break
-		} else if selectP == "C" || selectP == "c" {
+		} else if selectP == "C" || selectP == "c" { // line(ac) line(bd)
 			k1, d1, s1 = line(a, c)
 			k2, d2, s2 = line(b, d)
 			break
-		} else if selectP == "D" || selectP == "d" {
+		} else if selectP == "D" || selectP == "d" { // line(ad) line(bc)
 			k1, d1, s1 = line(a, d)
 			k2, d2, s2 = line(b, c)
 			break
@@ -74,34 +77,33 @@ func main() {
 	}
 
 	//判断是否平行
-	if s1 != "" && s2 != "" {
+	if s1 != "" && s2 != "" { //k不存在的平行
 		fmt.Println("这两条直线平行")
-	} else if (d1 != d2) && (k1 == k2) {
+	} else if (d1 != d2) && (k1 == k2) { //k存在的平行
 		fmt.Println("这两条直线平行")
-	} else if (d1 == d2) && (k1 == k2) {
+	} else if (d1 == d2) && (k1 == k2) { //两直线重合
 		fmt.Println("这两条直线相交得都重合了！")
 	} else {
-		fmt.Println("这两条直线相交")
+		fmt.Println("这两条直线相交") //不平行
 	}
-
 }
 
 func line(p1, p2 Point) (k float64, d float64, nok string) {
-	if p1.x-p2.x == 0 {
+	if p1.x-p2.x == 0 { // k不存在
 		fmt.Printf("直线表达式是：x = %v\n", p1.x)
 		nok = "k不存在"
 		return k, d, nok
 
-	} else if p1.y-p2.y == 0 {
+	} else if p1.y-p2.y == 0 { // k==0
 		fmt.Printf("直线表达式是：y = %v\n", p1.y)
 		k = 0.0
 		d = p1.y
 		return
-	} else {
+
+	} else { //k存在且不等于0
 		k = (p1.y - p2.y) / (p1.x - p2.x)
 		d = p1.y - k*p1.x
 		fmt.Printf("直线表达式是：y = %vx + %v\n", k, d)
 		return
 	}
-
 }
