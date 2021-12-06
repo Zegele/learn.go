@@ -37,6 +37,6 @@ func main() {
 			poker[l] = temppocker[l]
 		}
 	}
-	fmt.Println("pocker是：", poker)
+	fmt.Println("洗后pocker是：", poker)
 
 }

@@ -42,4 +42,5 @@ func main() {
 
 	fmt.Println(year)
 	fmt.Println(yeararr)
+	//todo 对应星期
 }
