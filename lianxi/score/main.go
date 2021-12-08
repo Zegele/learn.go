@@ -47,12 +47,12 @@ func rankscore(m map[string]int) {
 	var keyslice []string
 	var valslice []int
 
-	for key, val := range m {
+	for key, val := range m { //把map装到2个切片中
 		keyslice = append(keyslice, key)
 		valslice = append(valslice, val)
 	}
 
-	for i := 0; i < len(valslice)-1; i++ {
+	for i := 0; i < len(valslice)-1; i++ { //从高到低排序
 		for j := 0; j < len(valslice)-1; j++ {
 			if valslice[j] < valslice[j+1] {
 				valslice[j], valslice[j+1] = valslice[j+1], valslice[j]
@@ -61,7 +61,7 @@ func rankscore(m map[string]int) {
 		}
 	}
 
-	for k := 0; k < len(valslice); k++ {
+	for k := 0; k < len(valslice); k++ { //打印排列好的顺序
 		fmt.Printf("%s的成绩是 ：%d\n", keyslice[k], valslice[k])
 	}
 }
