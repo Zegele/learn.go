@@ -31,7 +31,7 @@
     EAP版可以不需要激活使用，但是先要注册jetbrains账号，用邮箱注册个账号后，登录即可使用。（注意：注册过程可能需要用到科学上网）
 
     2.2 使用EAP版
-    进入goland后，settings - system settings - updates - check IDE update for :Early Access Program （todo： 貌似可以自己手动更新，待补充）
+    进入goland后，settings - Appearance & Behavior - system settings - updates - check IDE update for :Early Access Program （todo： 貌似可以自己手动更新，待补充）
 
     2.3 设置golang主题
     settings-appearance-Theme: Darcula(推荐)
