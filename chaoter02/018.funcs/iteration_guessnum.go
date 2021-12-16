@@ -4,22 +4,26 @@ import (
 	"fmt"
 )
 
-var min int
-var max int
-
-func main() {
-	fmt.Print("我们要玩猜数字的游戏。现在需要你确定猜数字的范围，请先输入最小值（整数）： ")
-	fmt.Scanln(&min)
-	fmt.Print("请再输入最大值（整数）：")
-	for {
-		fmt.Scanln(&max)
-		if max < min {
-			fmt.Print("输入有误，请输入更大的值。")
-		}
-		break
-	}
-
-}
 func guess(left, right uint) {
-
+	guessed := (left + right) / 2
+	var getFromInput string
+	fmt.Println("我猜是：", guessed)
+	fmt.Print("如果高了，输入1，如果低了，输入0；对了，输入9：")
+	fmt.Scanln(&getFromInput)
+	switch getFromInput {
+	case "1":
+		if left == right {
+			fmt.Println("你是不是改主意了？")
+			return
+		}
+		guess(left, guessed-1)
+	case "0":
+		if left == right {
+			fmt.Println("你是不是改主意了？")
+			return
+		}
+		guess(guessed+1, right)
+	case "9":
+		fmt.Println("你心里想的数字是：", guessed)
+	}
 }
