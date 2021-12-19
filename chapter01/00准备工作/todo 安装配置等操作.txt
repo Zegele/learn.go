@@ -45,7 +45,7 @@
     2.6 设置tab（————）或空格（...）的标志
         Setting - Editor - General - Appearance - Show Whitespace 全选
 
-3. git下载，安装，配置
+3. git下载，安装，配置 //todo 学习git 和github
     3.1 下载并安装git
         git官网：https://git-scm.com/downloads
         一路默认安装
@@ -146,3 +146,5 @@
             set: 导出\设定一个新的环境变量
             exit: 退出shell
             runas: 成为超级用户root （危险命令！）
+
+6 sourcetree 是不是要学一学
