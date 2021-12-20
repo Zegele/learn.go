@@ -31,14 +31,14 @@ func Putin() (name string, age int, sexval float64, weight float64, tall float64
 	fmt.Print("请输入体重（kg）：")
 	fmt.Scanln(&weight)
 	for weight < 20 || weight > 1000 {
-		fmt.Println("抱歉，体重(kg)不在计算区间，请输入20-1000之间的数。")
+		fmt.Print("抱歉，体重(kg)不在计算区间，请输入20-1000之间的数：")
 		fmt.Scanln(&weight)
 	}
 
 	fmt.Print("请输入身高（米）：")
 	fmt.Scanln(&tall)
 	for tall < 0.5 || tall > 3 {
-		fmt.Println("抱歉，身高（米）不在计算区间，请输入0.5-3之间的数。")
+		fmt.Print("抱歉，身高（米）不在计算区间，请输入0.5-3之间的数：")
 		fmt.Scanln(&tall)
 	}
 	fmt.Println("基本信息：", name, sex, age, weight, tall)

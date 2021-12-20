@@ -83,5 +83,3 @@ func hownum() (num int) {
 		}
 	}
 }
-
-//平均bfr

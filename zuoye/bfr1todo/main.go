@@ -11,198 +11,70 @@ package main
 */
 import (
 	"fmt"
+	"github.com/spf13/cobra"
+	"learn.go/zuoye/bfr_rely_on/bfr_suggest"
+	"learn.go/zuoye/bfr_rely_on/bmi"
 )
 
-type Person struct {
-	num     int
-	name    string
-	age     int
-	sex     string
-	sexval  float64
-	tall    float64
-	weight  float64
-	bmi     float64
-	bfr     float64
-	suggest string
-}
+/*
+项目A:
+	a文件夹:
+		main.go
+	b文件夹:
+		bb.go
+	c文件夹:
+		cc.go
+	mod.go
 
-var person Person
-var list []Person
+这个项目A结构中，如果main引用bb或cc中的函数，bb或cc中的函数首字母都得用大写（公有函数）么？
+试过小写不行。
+
+*/
 
 func main() {
+	var (
+		name   string
+		sex    string
+		sexval float64
+		tall   float64
+		weight float64
+		age    int
+	)
 	fmt.Println("体脂计算器")
-
-	//录入数据
-	person.putin() //todo ？？？ 为什么输入了数据，但结果提还是空的？ 对方法的使用还是不够熟练啊
-
-	person.bmi = person.countbmi() / 100
-	person.bfr = person.countbfr() / 100
-
-	//suggest
-	fmt.Println(person)
-	person.bfrSuggest(person)
-	fmt.Println(person)
-
-	list = append(list, person)
-
-	//输出信息
-	for _, val := range list {
-		fmt.Printf("序号:%d， 姓名：%s， BMI：%.2f， BFR:%.2f， 建议：%s\n", val.num, val.name, val.bmi, val.bfr, val.suggest)
-	}
-
-	//总人数和平均体脂率
-	aBfr(list)
-}
-
-func (p *Person) putin() (person Person) {
-	fmt.Print("请输入姓名：")
-	fmt.Scanln(&person.name)
-
-	fmt.Print("请输入年龄：")
-	fmt.Scanln(&person.age)
-	for person.age < 18 || person.age > 150 {
-		fmt.Print("抱歉，不在符合的年龄范围，请输入18-150的整数：")
-		fmt.Scanln(&person.age)
-	}
-
-	fmt.Print("请输入性别（男/女）：")
-	for {
-		fmt.Scanln(&person.sex)
-		if person.sex == "男" || person.sex == "man" {
-			person.sexval = 1.0
-			break
-		} else if person.sex == "女" || person.sex == "woman" {
-			person.sexval = 0.0
-			break
-		} else {
-			fmt.Print("性别输入有误请重新输入（男/女）:")
-		}
-	}
-
-	fmt.Print("请输入体重（kg）：")
-	fmt.Scanln(&person.weight)
-	for person.weight < 20 || person.weight > 1000 {
-		fmt.Println("抱歉，体重(kg)不在计算区间，请输入20-1000之间的数。")
-		fmt.Scanln(&person.weight)
-	}
-
-	fmt.Print("请输入身高（米）：")
-	fmt.Scanln(&person.tall)
-	for person.tall < 0.5 || person.tall > 3 {
-		fmt.Println("抱歉，身高（米）不在计算区间，请输入0.5-3之间的数。")
-		fmt.Scanln(&person.tall)
-	}
-	return person
-}
-
-func (p *Person) bfrSuggest(person Person) {
-	var sug string
-	var nbfr float64 = person.bfr
-	if person.sexval == 1.0 { // 男
-		if person.age >= 18 || person.age < 40 {
-			switch {
-			case nbfr > 0.0 && nbfr <= 0.1:
-				sug = "偏瘦，赶紧多吃点!"
-			case nbfr > 0.1 && nbfr <= 0.16:
-				sug = "标准，继续保持！"
-			case nbfr > 0.16 && nbfr <= 0.21:
-				sug = "偏重，现在少吃点还来得及。"
-			case nbfr > 0.21 && nbfr <= 0.26:
-				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
-				sug = "算了，放弃吧..."
+	cmd := &cobra.Command{
+		Use:   "healthcheck",
+		Short: "体脂计算，根据身高，体重，年龄，性别计算体脂率，并给出健康建议。",
+		Long:  "...",
+		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Println("name:", name)
+			fmt.Println("sex:", sex)
+			fmt.Println("tall:", tall)
+			fmt.Println("weight:", weight)
+			fmt.Println("age:", age)
+			if sex == "男" || sex == "man" {
+				sexval = 1
+			} else {
+				sexval = 0
 			}
-		} else if person.age >= 40 || person.age < 60 {
-			switch {
-			case nbfr > 0.0 && nbfr <= 0.11:
-				sug = "偏瘦，赶紧多吃点!"
-			case nbfr > 0.11 && nbfr <= 0.17:
-				sug = "标准，继续保持！"
-			case nbfr > 0.17 && nbfr <= 0.22:
-				sug = "偏重，现在少吃点还来得及。"
-			case nbfr > 0.22 && nbfr <= 0.27:
-				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
-				sug = "算了，放弃吧..."
-			}
-		} else {
-			switch {
-			case nbfr > 0.0 && nbfr <= 0.13:
-				sug = "偏瘦，赶紧多吃点!"
-			case nbfr > 0.13 && nbfr <= 0.19:
-				sug = "标准，继续保持！"
-			case nbfr > 0.19 && nbfr <= 0.24:
-				sug = "偏重，现在少吃点还来得及。"
-			case nbfr > 0.24 && nbfr <= 0.29:
-				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
-				sug = "算了，放弃吧..."
-			}
-		}
-		person.suggest = sug //给结构体对象suggest赋值
-	} else { //person.sexval == 0.0 女
-		if person.age >= 18 || person.age < 40 {
-			switch {
-			case nbfr > 0.0 && nbfr <= 0.2:
-				sug = "偏瘦，赶紧多吃点!"
-			case nbfr > 0.2 && nbfr <= 0.27:
-				sug = "标准，继续保持！"
-			case nbfr > 0.27 && nbfr <= 0.34:
-				sug = "偏重，现在少吃点还来得及。"
-			case nbfr > 0.34 && nbfr <= 0.39:
-				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
-				sug = "算了，放弃吧..."
-			}
-		} else if person.age >= 40 || person.age < 60 {
-			switch {
-			case nbfr > 0.0 && nbfr <= 0.21:
-				sug = "偏瘦，赶紧多吃点!"
-			case nbfr > 0.21 && nbfr <= 0.28:
-				sug = "标准，继续保持！"
-			case nbfr > 0.28 && nbfr <= 0.35:
-				sug = "偏重，现在少吃点还来得及。"
-			case nbfr > 0.35 && nbfr <= 0.40:
-				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
-				sug = "算了，放弃吧..."
-			}
-		} else {
-			switch {
-			case nbfr > 0.0 && nbfr <= 0.22:
-				sug = "偏瘦，赶紧多吃点!"
-			case nbfr > 0.22 && nbfr <= 0.29:
-				sug = "标准，继续保持！"
-			case nbfr > 0.29 && nbfr <= 0.36:
-				sug = "偏重，现在少吃点还来得及。"
-			case nbfr > 0.36 && nbfr <= 0.41:
-				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
-				sug = "算了，放弃吧..."
-			}
-		}
-		person.suggest = sug //给结构体对象suggest赋值
+			//计算bmi bfr
+			bmi := bmi.Calcbmi(weight, tall)
+			bfr := bfr1.Calcbfr(bmi, age, sexval)
+			//totalbfr += bfr
+			//suggest
+			sug := bfr1.BfrSuggest(bfr, sexval, age)
+			//输出信息
+			fmt.Printf("%s的体脂是：%f,给您的建议是：%s。\n", name, bfr, sug)
+		},
 	}
-}
+	//录入数据：
+	cmd.Flags().StringVar(&name, "name", "", "姓名")
+	cmd.Flags().StringVar(&sex, "sex", "", "性别")
+	cmd.Flags().Float64Var(&tall, "tall", 0, "身高")
+	cmd.Flags().Float64Var(&weight, "weight", 0, "体重")
+	cmd.Flags().IntVar(&age, "age", 0, "年龄")
 
-//bmi
-func (p *Person) countbmi() (bmi float64) {
-	bmi = p.weight / (p.tall * p.tall)
-	return
-}
+	cmd.Execute()
 
-//bfr
-func (p *Person) countbfr() (bfr float64) {
-	bfr = 1.2*(p.bmi*100) + 0.23*float64(p.age) - 5.4 - 10.8*(p.sexval)
-	return
-}
+	//是否继续
 
-//平均bfr
-func aBfr(list []Person) {
-	tBfr := 0.0
-	for i := 0; i < len(list); i++ {
-		tBfr += list[i].bfr
-	}
-	aBfr := tBfr / float64(len(list))
-	fmt.Printf("总人数为%d人，这%d人的平均体脂率为：%.2f\n", len(list), len(list), aBfr)
 }

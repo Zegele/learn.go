@@ -9,13 +9,10 @@ func ContinueOrNot() bool {
 	for {
 		if continueornot == "n" {
 			return false
-
 		} else if continueornot == "y" {
 			return true
-
 		} else {
 			fmt.Println("输入有误，请输入 y 或 n 。")
 		}
-
 	}
 }

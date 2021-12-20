@@ -31,7 +31,7 @@ func main() {
 	var list []Person
 	fmt.Println("体脂计算器")
 
-	for i := 1; i <= 1; i++ {
+	for i := 1; i <= 3; i++ {
 
 		person.num = i
 

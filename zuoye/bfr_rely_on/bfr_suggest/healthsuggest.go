@@ -12,8 +12,10 @@ func BfrSuggest(bfr float64, sexval float64, age int) (sug string) {
 				sug = "偏重，现在少吃点还来得及。"
 			case bfr > 0.21 && bfr <= 0.26:
 				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
+			case bfr > 0.26:
 				sug = "算了，放弃吧..."
+			default:
+				sug = "不在范围内，你哪里输入错了么？" //应该是err
 			}
 		} else if age >= 40 || age < 60 {
 			switch {
@@ -25,8 +27,10 @@ func BfrSuggest(bfr float64, sexval float64, age int) (sug string) {
 				sug = "偏重，现在少吃点还来得及。"
 			case bfr > 0.22 && bfr <= 0.27:
 				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
+			case bfr > 0.27:
 				sug = "算了，放弃吧..."
+			default:
+				sug = "不在范围内，你哪里输入错了么？" //应该是err
 			}
 		} else {
 			switch {
@@ -38,8 +42,10 @@ func BfrSuggest(bfr float64, sexval float64, age int) (sug string) {
 				sug = "偏重，现在少吃点还来得及。"
 			case bfr > 0.24 && bfr <= 0.29:
 				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
+			case bfr > 0.29:
 				sug = "算了，放弃吧..."
+			default:
+				sug = "不在范围内，你哪里输入错了么？"
 			}
 		}
 		return sug
@@ -54,8 +60,10 @@ func BfrSuggest(bfr float64, sexval float64, age int) (sug string) {
 				sug = "偏重，现在少吃点还来得及。"
 			case bfr > 0.34 && bfr <= 0.39:
 				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
+			case bfr > 0.39:
 				sug = "算了，放弃吧..."
+			default:
+				sug = "不在范围内，你哪里输入错了么？"
 			}
 		} else if age >= 40 || age < 60 {
 			switch {
@@ -67,8 +75,10 @@ func BfrSuggest(bfr float64, sexval float64, age int) (sug string) {
 				sug = "偏重，现在少吃点还来得及。"
 			case bfr > 0.35 && bfr <= 0.40:
 				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
+			case bfr > 0.4:
 				sug = "算了，放弃吧..."
+			default:
+				sug = "不在范围内，你哪里输入错了么？"
 			}
 		} else {
 			switch {
@@ -80,8 +90,10 @@ func BfrSuggest(bfr float64, sexval float64, age int) (sug string) {
 				sug = "偏重，现在少吃点还来得及。"
 			case bfr > 0.36 && bfr <= 0.41:
 				sug = "肥胖，抓紧运动，或许还来得及。"
-			default:
+			case bfr > 0.41:
 				sug = "算了，放弃吧..."
+			default:
+				sug = "不在范围内，你哪里输入错了么？"
 			}
 		}
 		return sug
