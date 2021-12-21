@@ -12,8 +12,9 @@ package main
 import (
 	"fmt"
 	"github.com/spf13/cobra"
-	"learn.go/zuoye/bfr_rely_on/bfr_suggest"
+	bfr1 "learn.go/zuoye/bfr_rely_on/bfr_suggest"
 	"learn.go/zuoye/bfr_rely_on/bmi"
+	//"learn.go/zuoye/bfr_rely_on/bmi"
 )
 
 /*
@@ -57,6 +58,7 @@ func main() {
 				sexval = 0
 			}
 			//计算bmi bfr
+
 			bmi := bmi.Calcbmi(weight, tall)
 			bfr := bfr1.Calcbfr(bmi, age, sexval)
 			//totalbfr += bfr
