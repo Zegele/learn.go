@@ -14,7 +14,7 @@ import (
 	"github.com/spf13/cobra"
 	bfr1 "learn.go/zuoye/bfr_rely_on/bfr_suggest"
 	"learn.go/zuoye/bfr_rely_on/bmi"
-	//"learn.go/zuoye/bfr_rely_on/bmi"
+	//"learn.go/zuoye/bfr_rely_on/calcbmi"
 )
 
 /*

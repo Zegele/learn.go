@@ -51,7 +51,7 @@ func main() {
 			name, age, sexval, weight, tall = putin.Putin()
 
 			//计算体脂率
-			//bmi := bmi.Calcbmi(weight, tall) //其实不需要这个中间件
+			//calcbmi := calcbmi.Calcbmi(weight, tall) //其实不需要这个中间件
 			bfr := bfr1.Calcbfr(bmi.Calcbmi(weight, tall), age, sexval) //体脂率
 			totalbfr += bfr                                             //总体脂率累加
 
