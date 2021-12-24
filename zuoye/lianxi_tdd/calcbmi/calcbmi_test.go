@@ -2,7 +2,7 @@ package calcbmi
 
 import "testing"
 
-func TestCalcBMI1(t *testing.T) {
+func TestCalcBMI(t *testing.T) {
 
 	//计算测试
 	//传入合法数据
