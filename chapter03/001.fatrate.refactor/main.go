@@ -7,10 +7,6 @@ import (
 	calc "learn.go/chapter03/001.fatrate.refactor/calc"
 )
 
-func init() {
-	fmt.Println("我是init函数--1")
-}
-
 func main() {
 	for {
 		mainFatRateBody()
@@ -19,10 +15,6 @@ func main() {
 			break
 		}
 	}
-}
-
-func init() {
-	fmt.Println("我是init函数--2")
 }
 
 func recoverMainBody() {

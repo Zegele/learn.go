@@ -46,6 +46,9 @@ func PutinAll() (name string, age int, sex string, tall float64, weight float64,
 
 	name, err0 := putinName()
 	for err0 != nil {
+		//if cont := ContinueOrNot(); !cont {
+		//	break
+		//}
 		name, err0 = putinName()
 	}
 
@@ -63,6 +66,7 @@ func PutinAll() (name string, age int, sex string, tall float64, weight float64,
 	for err3 != nil {
 		tall, err3 = putinTall()
 	}
+
 	weight, err4 := putinWeight()
 	for err4 != nil {
 		weight, err3 = putinWeight()
@@ -72,3 +76,19 @@ func PutinAll() (name string, age int, sex string, tall float64, weight float64,
 
 	return PutinAll()
 }
+func ContinueOrNot() bool {
+	var continueornot string
+	fmt.Println("是否继续？(y/n)")
+	for {
+		fmt.Scanln(&continueornot)
+		if continueornot == "n" {
+			return false
+		} else if continueornot == "y" {
+			return true
+		} else {
+			fmt.Println("输入有误，请输入 y 或 n 。")
+		}
+	}
+}
+
+// os.Exit(1)

@@ -15,6 +15,6 @@ func BMI(weightKG, heightM float64) (bmi float64, err error) {
 		err = fmt.Errorf("height cannot be 0")
 		return
 	}
-	bmi = weightKG / (heightM * heightM)
+	bmi = weightKG / (heightM * heightM) / 100 //除以100，这里改动
 	return
 }

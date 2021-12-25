@@ -49,7 +49,7 @@ func HeslthSug(sex string, age int, bft float64) (sug string) {
 			}
 		}
 		return sug
-	} else { //person.sexval == 0.0 女
+	} else { //sex == 女 || woman
 		if age >= 18 || age < 40 {
 			switch {
 			case bft > 0.0 && bft <= 0.2:

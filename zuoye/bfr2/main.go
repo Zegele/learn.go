@@ -11,6 +11,8 @@ package main
 */
 import (
 	"fmt"
+	_ "github.com/armstrongli/go-bmi"
+	gobmi "github.com/armstrongli/go-bmi"
 	"learn.go/zuoye/bfr_rely_on/a_bfr"
 	"learn.go/zuoye/bfr_rely_on/bfr_suggest"
 	"learn.go/zuoye/bfr_rely_on/bmi"
@@ -51,15 +53,26 @@ func main() {
 			name, age, sexval, weight, tall = putin.Putin()
 
 			//计算体脂率
+			//自己改造的
 			//calcbmi := calcbmi.Calcbmi(weight, tall) //其实不需要这个中间件
 			bfr := bfr1.Calcbfr(bmi.Calcbmi(weight, tall), age, sexval) //体脂率
-			totalbfr += bfr                                             //总体脂率累加
+			//fmt.Println(bfr)
+			totalbfr += bfr //总体脂率累加
+
+			//引用老师的
+			bmiTeacher, err := gobmi.BMI(weight, tall)
+			fmt.Println(bmiTeacher)
+			if err != nil {
+				fmt.Println(err)
+			}
+			bfrTeacher := bfr1.Calcbfr(bmiTeacher, age, sexval)
 
 			//suggest
 			sug := bfr1.BfrSuggest(bfr, sexval, age)
-
+			sugTeacher := bfr1.BfrSuggest(bfrTeacher, sexval, age)
 			//输出信息
 			fmt.Printf("%s的体脂是：%f,给您的建议是：%s。\n", name, bfr, sug)
+			fmt.Printf("%s的体脂是：%f,给您的建议是：%s。\n", name, bfrTeacher, sugTeacher)
 		}
 
 		//计算平均体脂率
