@@ -11,12 +11,12 @@ package main
 */
 import (
 	"fmt"
-	_ "github.com/armstrongli/go-bmi"
 	gobmi "github.com/armstrongli/go-bmi"
 	"learn.go/zuoye/bfr_rely_on/a_bfr"
 	"learn.go/zuoye/bfr_rely_on/bfr_suggest"
 	"learn.go/zuoye/bfr_rely_on/bmi"
 	"learn.go/zuoye/bfr_rely_on/continue_ornot"
+	"learn.go/zuoye/bfr_rely_on/hownum"
 	"learn.go/zuoye/bfr_rely_on/putin"
 )
 
@@ -46,7 +46,7 @@ func main() {
 	fmt.Println("体脂计算器")
 	for {
 		//输入：几个人参与体脂计算
-		num := hownum()
+		num := hownum.Hownum()
 		totalbfr := 0.0 //初始化总体脂率为0
 		for i := 1; i <= num; i++ {
 			//录入数据
@@ -56,12 +56,10 @@ func main() {
 			//自己改造的
 			//calcbmi := calcbmi.Calcbmi(weight, tall) //其实不需要这个中间件
 			bfr := bfr1.Calcbfr(bmi.Calcbmi(weight, tall), age, sexval) //体脂率
-			//fmt.Println(bfr)
-			totalbfr += bfr //总体脂率累加
+			totalbfr += bfr                                             //总体脂率累加
 
 			//引用老师的
 			bmiTeacher, err := gobmi.BMI(weight, tall)
-			fmt.Println(bmiTeacher)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -81,18 +79,6 @@ func main() {
 		//是否继续
 		if cont := continue_ornot.ContinueOrNot(); !cont {
 			break
-		}
-	}
-}
-
-func hownum() (num int) {
-	fmt.Print("你要录入几个人的数据？请输入数字：")
-	for {
-		fmt.Scanln(&num)
-		if num <= 0 {
-			fmt.Println("请输入一个大于0的数字")
-		} else {
-			return
 		}
 	}
 }
