@@ -35,8 +35,8 @@ func TestCalcBFT(t *testing.T) {
 	//录入非法age，返回错误
 	{
 		t_bft, err := CalcBFT(0.20, -1, "man") //tall 1.8, weight 65
-		if err == fmt.Errorf("age不能是0， 或负数，且不能大于150") {
-			t.Fatalf("预期的err是:age不能是0， 或负数，且不能大于150,但测试结果为%v", err)
+		if err == fmt.Errorf("age不能小于18，且不能大于150") {
+			t.Fatalf("预期的err是:age不能小于18，且不能大于150,但测试结果为%v", err)
 		}
 		if t_bft != -1 {
 			t.Fatalf("预期结果为:-1，但测试结果为：%f:", t_bft)

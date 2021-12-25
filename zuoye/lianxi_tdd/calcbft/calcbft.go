@@ -11,8 +11,8 @@ func CalcBFT(bmi float64, age int, sex string) (bft float64, err error) {
 		return 0, fmt.Errorf("bft不能为0，或负数")
 	}
 	//排除非法age
-	if age <= 0 && age >= 150 {
-		return -1, fmt.Errorf("age不能是0， 或负数，且不能大于150")
+	if age < 18 || age >= 150 { //又是 || 和 && 使用错了
+		return -1, fmt.Errorf("age不能小于18，且不能大于150")
 	}
 	//排除非法性别
 	if sex != "男" && sex != "man" && sex != "woman" && sex != "女" { //注意 使用 || ，还是使用&&。
