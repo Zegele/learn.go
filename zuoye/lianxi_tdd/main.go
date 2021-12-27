@@ -23,8 +23,8 @@ func main() {
 	bft, err := calcbft.CalcBFT(bmi, age, sex)
 	if err != nil {
 		fmt.Println(err)
+		//给出建议
 	}
-	//给出建议
 	sug := healthsug.HeslthSug(sex, age, bft)
 	fmt.Printf("%s的体脂率是%f,健康建议是：%s。", name, bft, sug)
 }
