@@ -30,7 +30,7 @@ func getRand(name string) (rand int, fatRate float64) {
 	for i, frItem := range randArr {
 		_nameS := fatRate2PersonMap[frItem]
 		for _, _name := range _nameS {
-			if _name == name {
+			if _name == name { //因为该函数有一个name参数，匹配上了，就知道该name是第几名了。
 				rand = i + 1
 				fatRate = frItem
 				return
