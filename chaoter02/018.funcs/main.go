@@ -39,7 +39,7 @@ func main() {
 
 	fmt.Println(fib(10)) // 斐波那契数列 递归练习
 
-	//fmt.Println("done calc, sleep somewhile")
+	//fmt.Println("done 04-fatrate, sleep somewhile")
 	//time.Sleep(10 * time.Second)
 
 	sampleSubdomain2()

@@ -6,14 +6,13 @@ func main() {
 	var left, right int = 1, 2
 	// var op string = "+"
 
-	c := Calculator{
+	c := Calculator{ // Calculator是结构体
 		left:  left,
 		right: right,
-		//op: op,
 	}
-	fmt.Printf("&c @ main =%p\n", &c)
-	fmt.Println(c.Add())
-	fmt.Println("c.result=", c.result)
+	fmt.Printf("c的地址是 =%p\n", &c)      //c的地址是 =0xc000070480
+	fmt.Println(c.Add())               //c的地址是=0xc0000704b0  地址是不一样的,\
+	fmt.Println("c.result=", c.result) //c.result= 0
 
 	newC := NewCalculator{}
 	newC.left = 100
@@ -26,7 +25,7 @@ func main() {
 }
 
 type MyCommand struct {
-	mainCommand    *string
+	mainCommand    *string //这是什么意思？？？
 	commandOptions map[string]string
 }
 
