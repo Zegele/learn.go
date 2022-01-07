@@ -39,9 +39,10 @@ func main() {
 	}
 
 	{
-		var nothingSlice []int
-		nothingSlice = append(nothingSlice, 100)
-		fmt.Println(nothingSlice) //[100]
+		var nothingSlice []int //var nothingSlice []int = []int{} 实例化
+		//nothingSlice[0] = 100 // index out of range [0] with length 0 空切片不能这样赋值？
+		nothingSlice = append(nothingSlice, 100) //切片也是引用类型，但是不用实例化，可以使用append
+		fmt.Println(nothingSlice)                //[100]
 	}
 }
 
