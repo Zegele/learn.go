@@ -54,6 +54,7 @@ func (d *DianTiXiang) MoveUpToRequest(DianTiDoor func()) (toRequest int, err err
 
 //怎样把int转成字符串？
 func (d *DianTiXiang) DianTiDoor() {
+
 	fmt.Println("待停稳 --> 1s")
 	time.Sleep(1 * time.Second)
 	fmt.Println("开门 --> 3s")
