@@ -184,11 +184,13 @@ func (d *DianTiXiang) NewMoveTo() {
 			d.SayJiFloor()
 		}
 		d.DianTiDoor()
-		d.ToUpFloorSlice = d.ToUpFloorSlice[1:] //到这层后，就把这层删掉
+		d.ToUpFloorSlice = d.ToUpFloorSlice[1:] //到这层就把这层删掉
 		d.MoveToUp()
-		d.FangXiang = "ToDown"
-		fmt.Println("电梯向下运行>>>")
-		d.MoveToDown()
+		if d.ToDownFloorSlice != nil {
+			d.FangXiang = "ToDown"
+			fmt.Println("电梯向下运行>>>")
+			d.MoveToDown()
+		}
 	} else if d.FangXiang == "ToDown" {
 		fmt.Println("电梯向下运行>>>")
 		for chaJiLou := d.AtFloor - d.ToDownFloorSlice[0]; chaJiLou > 0; chaJiLou-- {
@@ -198,9 +200,11 @@ func (d *DianTiXiang) NewMoveTo() {
 		d.DianTiDoor()
 		d.ToDownFloorSlice = d.ToDownFloorSlice[1:] //到这层后，就把这层删掉
 		d.MoveToDown()
-		d.FangXiang = "ToUp"
-		fmt.Println("电梯向上运行>>>")
-		d.MoveToUp()
+		if d.ToUpFloorSlice != nil {
+			d.FangXiang = "ToUp"
+			fmt.Println("电梯向上运行>>>")
+			d.MoveToUp()
+		}
 	}
 }
 
@@ -225,6 +229,7 @@ func (d *DianTiXiang) MoveTo() {
 */
 
 func (d *DianTiXiang) MoveToUp() {
+	//fmt.Println("';lagafg", d.ToUpFloorSlice)
 	for _, floor := range d.ToUpFloorSlice {
 		chaJiLou := floor - d.AtFloor
 		for i := 0; i < chaJiLou; i++ {

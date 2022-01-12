@@ -10,8 +10,6 @@ type Ren struct {
 	WantFloorSlice []int  //想去哪层 [5] 要去5楼
 }
 
-//嵌套不同包的结构体： 包名.结构体名  //跨包使用，得首字母大写
-
 //确定人在几楼
 func (r *Ren) RequestAtWhere() { //几楼需要电梯
 	var renAtFloor int
@@ -56,5 +54,3 @@ func ContinueOrNot() bool {
 	}
 	return false
 }
-
-// at 3; want:452; req:143

@@ -1,14 +1,15 @@
 package main
 
+//支持任意楼request电梯，去任意层电梯。
 import (
 	"fmt"
-	"learn.go/zuoye/dianti/dianti7/diantixiang7"
-	ren2 "learn.go/zuoye/dianti/dianti7/ren"
+	"learn.go/zuoye/dianti/dianti8/diantixiang8"
+	ren2 "learn.go/zuoye/dianti/dianti8/ren"
 )
 
 func main() {
 	//做一些初始设置
-	var DianTi diantixiang7.DianTiXiang
+	var DianTi diantixiang8.DianTiXiang
 	DianTi.MaxFloor = 5 //电梯最高5层
 	DianTi.MinFloor = 1 //电梯最低1层
 	DianTi.AtFloor = 1  //初始电梯在1楼
@@ -25,7 +26,8 @@ func main() {
 
 	Ren.WantGoWhereAnNiu() //人想去几楼 人想去4，5，2，1楼
 	//预期电梯从1楼上到3楼，再4，5，向下，2，1。
-
+	fmt.Println("请求电梯的楼层：", DianTi.Ren.ReqFloorSlice)
+	fmt.Println("目标楼层：", DianTi.Ren.WantFloorSlice)
 	DianTi.DianTiYunXingFangXiang() //第一个请求，确定电梯运行方向
 	DianTi.JoinUpAndDown()          //根据电梯运行方向，整合好运行规则。即如果向上，就向上执行完毕，再转向，反之亦然。
 	//例如：[4,3,5] 和 [4,5,2,1]--> [3,4,5] [2,1]

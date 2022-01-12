@@ -37,71 +37,23 @@ func (d *DianTiXiang) DianTiYunXingFangXiang() (fangxiang string, newReqSlice []
 	d.NewReqFloorSlice = SliceSmallToBig(d.NewReqFloorSlice)
 
 	if d.AtFloor > d.Ren.ReqFloorSlice[0] {
-		fmt.Println(d.Ren.ReqFloorSlice)
 		d.FangXiang = "ToDown"
 	} else if d.AtFloor < d.Ren.ReqFloorSlice[0] {
 		d.FangXiang = "ToUp"
 	} else {
 		d.FangXiang = "不动"
-		fmt.Printf("已在 %d 楼\n", d.AtFloor)
 		d.DianTiDoor()
 		if d.AtFloor > d.Ren.WantFloorSlice[0] {
 			d.FangXiang = "ToDown"
 		} else if d.AtFloor < d.Ren.WantFloorSlice[0] {
 			d.FangXiang = "ToUp"
 		}
-		//d.Ren.ReqFloorSlice = d.Ren.ReqFloorSlice[1:]
-		//d.DianTiYunXingFangXiang()
 	}
 	return d.FangXiang, d.NewReqFloorSlice
 }
 
-/*
-//整合ren.TargetSlice 成为 ToUpTargetFloorSlice 和 ToDownTargetFloorSlice
-func (d *DianTiXiang) JoinTargetUpAndDown() {
-	for _, val := range d.Ren.WantFloorSlice {
-		if val > d.AtFloor {
-			d.ToUpTargetFloorSlice = append(d.ToUpTargetFloorSlice, val)
-		} else if val < d.AtFloor {
-			d.ToDownTargetFloorSlice = append(d.ToDownTargetFloorSlice, val)
-		}
-	}
-	//去重TargetUp
-	d.ToUpTargetFloorSlice = SliceQuChong(d.ToUpTargetFloorSlice)
-	//Up 从小到大排序
-	d.ToUpTargetFloorSlice = SliceSmallToBig(d.ToUpTargetFloorSlice)
-
-	//去重TargetDown
-	d.ToDownTargetFloorSlice = SliceQuChong(d.ToDownTargetFloorSlice)
-	//Down 从大到小排序
-	d.ToDownTargetFloorSlice = SliceBigToSmall(d.ToDownTargetFloorSlice)
-}
-
-//整合ren.requestSlice，成为 ToUpRequestFloorSlice 和 ToDownRequestFloorSlice
-func (d *DianTiXiang) JoinRequestUpAndDown() {
-	for _, val := range d.Ren.ReqFloorSlice {
-		if val > d.AtFloor {
-			d.ToUpRequestFloorSlice = append(d.ToUpRequestFloorSlice, val)
-		} else if val < d.AtFloor {
-			d.ToDownRequestFloorSlice = append(d.ToDownRequestFloorSlice, val)
-		}
-	}
-	//去重RequestUp
-	d.ToUpRequestFloorSlice = SliceQuChong(d.ToUpRequestFloorSlice)
-	//Up 从小到大排序
-	d.ToUpRequestFloorSlice = SliceSmallToBig(d.ToUpRequestFloorSlice)
-
-	//去重RequestDown
-	d.ToDownRequestFloorSlice = SliceQuChong(d.ToDownRequestFloorSlice)
-	//Down 从大到小排序
-	d.ToDownRequestFloorSlice = SliceBigToSmall(d.ToDownRequestFloorSlice)
-}
-*/
-
 func (d *DianTiXiang) JoinUpAndDown() {
-	fmt.Println(d.NewReqFloorSlice)
 	for _, valu := range d.NewReqFloorSlice { //[4,3,5]-> [3,4,5]  [5,1,2,4] --> [1,2,4,5]
-		//todo 怎么做？ 有ren.Req ,有ren.Want ,有newReq排好序的
 		if valu > d.NewReqFloorSlice[0] {
 			d.ToUpFloorSlice = append(d.ToUpFloorSlice, valu)
 		} else if valu < d.NewReqFloorSlice[0] {
@@ -112,8 +64,6 @@ func (d *DianTiXiang) JoinUpAndDown() {
 			d.ToDownFloorSlice = append(d.ToDownFloorSlice, valu)
 		}
 	}
-	fmt.Println(d.ToUpFloorSlice, "5555", d.ToDownFloorSlice)
-	fmt.Println(d.NewReqFloorSlice)
 	for _, valu := range d.Ren.WantFloorSlice {
 		if valu > d.Ren.ReqFloorSlice[0] {
 			d.ToUpFloorSlice = append(d.ToUpFloorSlice, valu)
@@ -121,7 +71,6 @@ func (d *DianTiXiang) JoinUpAndDown() {
 			d.ToDownFloorSlice = append(d.ToDownFloorSlice, valu)
 		}
 	}
-	fmt.Println(d.ToUpFloorSlice, "6666", d.ToDownFloorSlice)
 
 	//去重Ups
 	d.ToUpFloorSlice = SliceQuChong(d.ToUpFloorSlice)
@@ -186,9 +135,13 @@ func (d *DianTiXiang) NewMoveTo() {
 		d.DianTiDoor()
 		d.ToUpFloorSlice = d.ToUpFloorSlice[1:] //到这层后，就把这层删掉
 		d.MoveToUp()
-		d.FangXiang = "ToDown"
-		fmt.Println("电梯向下运行>>>")
-		d.MoveToDown()
+
+		if d.ToDownFloorSlice != nil { //判断是否有向下的必要 如果ToDownFloorSlice是空，就停在那层就行了。
+			d.FangXiang = "ToDown"
+			fmt.Println("电梯向下运行>>>")
+			d.MoveToDown()
+		}
+
 	} else if d.FangXiang == "ToDown" {
 		fmt.Println("电梯向下运行>>>")
 		for chaJiLou := d.AtFloor - d.ToDownFloorSlice[0]; chaJiLou > 0; chaJiLou-- {
@@ -198,31 +151,13 @@ func (d *DianTiXiang) NewMoveTo() {
 		d.DianTiDoor()
 		d.ToDownFloorSlice = d.ToDownFloorSlice[1:] //到这层后，就把这层删掉
 		d.MoveToDown()
-		d.FangXiang = "ToUp"
-		fmt.Println("电梯向上运行>>>")
-		d.MoveToUp()
+		if d.ToUpFloorSlice != nil { //判断是否有向下的必要 如果ToDownFloorSlice是空，就停在那层就行了。
+			d.FangXiang = "ToUp"
+			fmt.Println("电梯向上运行>>>")
+			d.MoveToUp()
+		}
 	}
 }
-
-/*
-func (d *DianTiXiang) MoveTo() {
-	if d.FangXiang == "ToUp" {
-		fmt.Println("电梯向上运行>>>")
-		d.MoveToUp()
-		d.FangXiang = "ToDown"
-		fmt.Println("电梯向下运行>>>")
-		d.MoveToDown()
-
-	} else if d.FangXiang == "ToDown" {
-		fmt.Println("电梯向下运行>>>")
-		d.MoveToDown()
-		d.FangXiang = "ToUp"
-		fmt.Println("电梯向上运行>>>")
-		d.MoveToUp()
-	}
-}
-
-*/
 
 func (d *DianTiXiang) MoveToUp() {
 	for _, floor := range d.ToUpFloorSlice {
