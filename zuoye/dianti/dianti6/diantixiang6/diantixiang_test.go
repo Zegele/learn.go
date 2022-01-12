@@ -17,12 +17,12 @@ func TestToUpOrDown(t *testing.T) {
 	DianTi.Ren = Ren // DianTi.Ren 是指针类型的结构体，所以给它赋值一个对应的指针变量即可。注意：要实例化过
 	Ren.ReqFloorSlice = []int{1, 4, 3, 2, 5, 1, 4}
 	DianTi.Ren.WantFloorSlice = []int{5, 2, 1, 3, 4, 4, 2, 1} //上面一行和这样两种写法效果相同？ 貌似是的
-	fmt.Println(DianTi)
-	fmt.Println(DianTi.Ren.ReqFloorSlice)
-	fmt.Println(DianTi.Ren.WantFloorSlice)
-	DianTi.JoinUpAndDown()
-	fmt.Println(DianTi.ToUpFloorSlice)
-	fmt.Println(DianTi.ToDownFloorSlice)
-	a := SliceQuChong([]int{4, 5, 4})
-	fmt.Println(a)
+
+	DianTi.JoinUpAndDown() //把需求和目标楼层合并，然后做出上的楼层和下的楼层，两个数组，结合电梯的方向使用。
+	fmt.Println("ToUpTargetFloorSlice:", DianTi.ToUpFloorSlice)
+	fmt.Println("ToDownTargetFloorSlice:", DianTi.ToDownFloorSlice)
+	DianTi.DianTiYunXingFangXiang()
+	fmt.Println(DianTi.FangXiang)
+	DianTi.MoveTo()
+	DianTi.DianTiAtWhere()
 }

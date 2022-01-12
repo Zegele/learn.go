@@ -43,33 +43,27 @@ func (d *DianTiXiang) JoinUpAndDown() {
 	for _, valu := range d.Ren.ReqFloorSlice {
 		if valu > d.AtFloor {
 			d.ToUpFloorSlice = append(d.ToUpFloorSlice, valu)
-			//		fmt.Println("1", d.ToUpFloorSlice)
 		} else if valu < d.AtFloor {
 			d.ToDownFloorSlice = append(d.ToDownFloorSlice, valu)
-			//		fmt.Println("2", d.ToDownFloorSlice)
 		}
 	}
 	for _, valu := range d.Ren.WantFloorSlice {
 		if valu > d.AtFloor {
 			d.ToUpFloorSlice = append(d.ToUpFloorSlice, valu)
-			//		fmt.Println("3", d.ToUpFloorSlice)
 		} else if valu < d.AtFloor {
 			d.ToDownFloorSlice = append(d.ToDownFloorSlice, valu)
-			//		fmt.Println("4", d.ToDownFloorSlice)
 		}
 	}
+
+	//去重Up
 	d.ToUpFloorSlice = SliceQuChong(d.ToUpFloorSlice)
-	//fmt.Println("11", d.ToUpFloorSlice)
-	//从小到大排序
+	//Up从小到大排序
 	d.ToUpFloorSlice = SliceSmallToBig(d.ToUpFloorSlice)
-	//fmt.Println("22", d.ToUpFloorSlice)
 
+	//去重Down
 	d.ToDownFloorSlice = SliceQuChong(d.ToDownFloorSlice)
-	//fmt.Println("33", d.ToDownFloorSlice)
-	//从大到小排序
+	//Down从大到小排序
 	d.ToDownFloorSlice = SliceBigToSmall(d.ToDownFloorSlice)
-	//fmt.Println("44", d.ToDownFloorSlice)
-
 }
 
 //去重函数
@@ -80,7 +74,6 @@ func SliceQuChong(yuanShiSlice []int) (quChongSlice []int) {
 				yuanShiSlice = append(yuanShiSlice[:j], yuanShiSlice[j+1:]...)
 			} else {
 				j++
-				break
 			}
 		}
 	}
@@ -107,7 +100,7 @@ func SliceQuChong(yuanShiSlice []int) (quChongSlice []int) {
 func SliceSmallToBig(quChongSlice []int) (smallToBigSlice []int) {
 	for i := 0; i < len(quChongSlice)-1; i++ {
 		for j := 0; j < len(quChongSlice)-1-i; j++ {
-			if quChongSlice[j] < quChongSlice[j+1] {
+			if quChongSlice[j] > quChongSlice[j+1] {
 				quChongSlice[j], quChongSlice[j+1] = quChongSlice[j+1], quChongSlice[j]
 			}
 		}
@@ -120,7 +113,7 @@ func SliceSmallToBig(quChongSlice []int) (smallToBigSlice []int) {
 func SliceBigToSmall(quChongSlice []int) (bigToSmallSlice []int) {
 	for i := 0; i < len(quChongSlice)-1; i++ {
 		for j := 0; j < len(quChongSlice)-1-i; j++ {
-			if quChongSlice[j] > quChongSlice[j+1] {
+			if quChongSlice[j] < quChongSlice[j+1] {
 				quChongSlice[j], quChongSlice[j+1] = quChongSlice[j+1], quChongSlice[j]
 			}
 		}
@@ -133,22 +126,65 @@ func SliceBigToSmall(quChongSlice []int) (bigToSmallSlice []int) {
 //直接简化为Move一个动作
 func (d *DianTiXiang) MoveTo() {
 	if d.FangXiang == "ToUp" {
-		for chaJiLou := d.ToUpFloorSlice[0] - d.AtFloor; chaJiLou > 0; chaJiLou-- {
+		d.MoveToUp()
+		d.FangXiang = "ToDown"
+		d.MoveToDown()
+
+	} else if d.FangXiang == "ToDown" {
+		d.MoveToDown()
+		d.FangXiang = "ToUp"
+		d.MoveToUp()
+	}
+	d.DianTiDoor()
+}
+func (d *DianTiXiang) MoveToUp() {
+	for _, floor := range d.ToUpFloorSlice {
+		chaJiLou := floor - d.AtFloor
+		for i := 0; i < chaJiLou; i++ {
 			d.AtFloor++
 			d.SayJiFloor()
 		}
 		d.ToUpFloorSlice = d.ToUpFloorSlice[1:]
+		d.DianTiDoor()
+	}
+}
 
-	} else if d.FangXiang == "ToDown" {
-		for chaJiLou := d.AtFloor - d.ToDownFloorSlice[0]; chaJiLou > 0; chaJiLou-- {
+func (d *DianTiXiang) MoveToDown() {
+	for _, floor := range d.ToDownFloorSlice {
+		chaJiLou := d.AtFloor - floor
+		for i := 0; i < chaJiLou; i++ {
 			d.AtFloor--
 			d.SayJiFloor()
 		}
 		d.ToDownFloorSlice = d.ToDownFloorSlice[1:]
+		d.DianTiDoor()
+	}
+}
+
+/*
+func (d *DianTiXiang) MoveTo() {
+	if d.FangXiang == "ToUp" {
+		for _, upFloor := range d.ToUpTargetFloorSlice {
+			chaJiLou := upFloor - d.AtFloor
+			for i := 0; i < chaJiLou; i++ {
+				d.AtFloor++
+				d.SayJiFloor()
+			}
+		}
+		d.ToUpTargetFloorSlice = []int{}
+	} else if d.FangXiang == "ToDown" {
+		for _, downFloor := range d.ToDownTargetFloorSlice {
+			chaJiLou := d.AtFloor - downFloor
+			for i := 0; i < chaJiLou; i++ {
+				d.AtFloor--
+				d.SayJiFloor()
+			}
+		}
+		d.ToDownTargetFloorSlice = []int{}
 	}
 	d.DianTiDoor()
-
 }
+*/
 
 /*
 //移动到req地方
@@ -245,7 +281,7 @@ func (d *DianTiXiang) DianTiDoor() {
 //电梯报楼层
 func (d *DianTiXiang) SayJiFloor() (sayFloor string) {
 	time.Sleep(1 * time.Second) //1秒过一层
-	d.SayFloor = "到" + fmt.Sprintf(" %d ", d.AtFloor) + "楼了"
+	d.SayFloor = "到" + fmt.Sprintf(" %d ", d.AtFloor) + "楼了............."
 	fmt.Println(d.SayFloor)
 	return d.SayFloor
 }
