@@ -32,6 +32,8 @@ func main() {
 	//fmt.Println(smallToBig)
 	//bigToSmall := SliceBigToSmall(smallToBig)
 	//fmt.Println(bigToSmall)
+	var t int
+	fmt.Println("t", t)
 
 }
 
