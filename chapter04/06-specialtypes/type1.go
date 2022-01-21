@@ -26,12 +26,31 @@ func main() {
 	fmt.Println(leader)
 	leader.Distribute()
 
-	var stdXQ = &student{name: "小强"}
-	var ldXQ Leader = Leader(*stdXQ)
+	var stdXQ = student{name: "小强"}
+	var ldXQ Leader = Leader(stdXQ) //ldXQ 是Leader类型（内其实就是student结构体），stdXQ是定义的student结构体。Leader(*stdXQ1)，将stdCXQ转化为Leader类型。
+	fmt.Println(stdXQ)
+	fmt.Println(ldXQ)
 	ldXQ.Distribute()
+
+	var stdXQ1 = &student{name: "小强"}
+	var ldXQ1 Leader = Leader(*stdXQ1) //Leader(*stdXQ1)，将*stdCXQ转化为Leader类型。
+	fmt.Println(stdXQ1)
+	fmt.Println(ldXQ1)
+	ldXQ1.Distribute()
 
 	//bytesTest1 := []byte{}
 	//var str1 string = string(bytesTest1)
+	std1 := student{ //type student struct{}
+		name:      "",
+		agree:     0,
+		disagress: 0,
+	}
+	l := Leader{ //type Leader student//Leader是student类型。而student是一个结构体类型。所以Leader的实际类型是结构体。
+		name:      "",
+		agree:     0,
+		disagress: 0,
+	}
+	fmt.Println(std1, l)
 }
 
 func getScoresOfStudent(name string) (Math, Chinese, English) {

@@ -14,7 +14,7 @@ func main() {
 	fmt.Println(c.Add())               //c的地址是=0xc0000704b0  地址是不一样的,\
 	fmt.Println("c.result=", c.result) //c.result= 0
 
-	newC := NewCalculator{}
+	newC := NewCalculator{} //newC := NewCalculator{&Calculator{}}
 	newC.left = 100
 	newC.right = 200
 	fmt.Println(newC.Add())

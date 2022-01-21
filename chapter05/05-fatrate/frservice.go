@@ -1,9 +1,11 @@
 package main
 
-import "log"
+import (
+	"log"
+)
 
 type fatRateService struct {
-	input  InputService
+	input  InputService // 接口
 	s      *fatRateSuggestion
 	output OutputService
 }
