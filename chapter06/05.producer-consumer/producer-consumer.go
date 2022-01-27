@@ -9,7 +9,8 @@ import (
 type Store struct { //定义了一个仓库，设置一个最大值，一个实际数量，一个锁
 	DataCount int
 	Max       int
-	lock      sync.Mutex //锁类型也能这么用？
+	lock      sync.Mutex //锁类型也能这么用？// sync.Mutex本质上是个对象： type Mutex struct {}
+	//如果是引用类型（指针类型，或map等），就要专门初始化一下
 }
 
 type Producer struct{} //定义了一个生产者的结构体

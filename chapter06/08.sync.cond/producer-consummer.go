@@ -25,7 +25,7 @@ func (Producer) Produce(s *Store) {
 	}
 	fmt.Println("开始生产+1")
 	s.DataCount++
-	s.cCond.Signal()
+	s.cCond.Signal() //Signal发送后，接受这个Signal的锁就打开了。
 }
 
 type Consumer struct{}
@@ -46,8 +46,8 @@ func main() {
 	s := &Store{
 		Max: 10,
 	}
-	s.pCond = sync.NewCond(&s.lock)
-	s.cCond = sync.NewCond(&s.lock)
+	s.pCond = sync.NewCond(&s.lock) //指针类型初始化 该condition是由系统的sync包中的NewCond函数初始化得来的。
+	s.cCond = sync.NewCond(&s.lock) //NewCond的参数是个接口，实现了该接口的对象，都可以放在这个参数的位置上？
 
 	pCount, cCount := 50, 50
 	for i := 0; i < pCount; i++ {

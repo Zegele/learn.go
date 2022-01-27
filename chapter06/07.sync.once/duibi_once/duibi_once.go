@@ -10,19 +10,21 @@ type rank struct {
 }
 
 var globalRank = &rank{}
-var once sync.Once = sync.Once{}
-
-//var globalRankInitialized bool
-//var globalRankInitializedLock sync.Mutex
+var globalRankInitialized bool
+var globalRankInitializedLock sync.Mutex
 
 //func init() {
 //	globalRank.standard = []string{"Asia"} //初始化rank
 //}
 
-func initGlobalRankStandard(standard []string) { //初始化rank // 将该函数放入go routine 中执行
-	once.Do(func() { //Do的参数是一个函数
-		globalRank.standard = standard //要执行初始化的内容
-	})
+func initGlobalRankStandard(standard []string) { //初始化rank
+	globalRankInitializedLock.Lock()
+	defer globalRankInitializedLock.Unlock()
+	if globalRankInitialized { //如果为true 说明已经被初始化了。return
+		return
+	} //如果没有被初始化，就向下执行初始化，然后把false变为true
+	globalRank.standard = standard
+	globalRankInitialized = true
 }
 
 func main() {
