@@ -1,8 +1,8 @@
 package main
 
 import (
-	"crypto/rand"
 	"fmt"
+	rand2 "math/rand"
 	"sync"
 	"time"
 )
@@ -22,8 +22,8 @@ func (s *Store) instrument() {
 type Producer struct{}
 
 func (Producer) Produce(s *Store) {
-	fmt.Println("开始生成+1")
-	s.store <- rand.Int()
+	fmt.Println("开始生产+1")
+	s.store <- rand2.Int()
 }
 
 type Consumer struct{}
