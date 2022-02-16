@@ -13,6 +13,7 @@ func main() {
 			m.Store(i, 1)
 			for {
 				v, ok := m.Load(i) //v 本质是个空接口 Load函数就是读取值
+				fmt.Println(i, v)
 				if !ok {
 					continue
 				}
@@ -22,5 +23,5 @@ func main() {
 			}
 		}(i)
 	}
-	time.Sleep(10 * time.Second)
+	time.Sleep(2 * time.Second)
 }

@@ -26,7 +26,7 @@ func main() {
 		}()
 	}
 
-	for num := 2; num <= 200000; num++ {
+	for num := 2; num <= 20000; num++ {
 		baseNumCh <- num
 	}
 	close(baseNumCh)

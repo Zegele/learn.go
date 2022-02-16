@@ -15,7 +15,7 @@ type FatRateRank struct {
 }
 
 func (r *FatRateRank) inputRecord(name string, fatRate ...float64) {
-	minFatRate := math.MaxFloat64
+	minFatRate := math.MaxFloat64 // math.MaxFloat64是一个常量，它是最大的浮点数
 	for _, item := range fatRate {
 		if minFatRate > item {
 			minFatRate = item

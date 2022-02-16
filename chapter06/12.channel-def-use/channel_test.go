@@ -28,6 +28,7 @@ func TestChanPutGet(t *testing.T) {
 	for i := 0; i < workerCount; i++ {
 		go func(i int) {
 			intCh <- i
+			fmt.Printf("注入%d\n", i)
 		}(i)
 	}
 
@@ -52,7 +53,7 @@ func TestChanPutGet2_Owait(t *testing.T) { //让Out等待
 		}(i)
 	}
 	fmt.Println(time.Now())
-	time.Sleep(5 * time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Println(time.Now())
 
 	for o := 0; o < workerCount; o++ {
@@ -102,7 +103,7 @@ func TestChanPutGet2_Owait_withSmallBuffer(t *testing.T) {
 		}(i)
 	}
 	fmt.Println(time.Now())
-	time.Sleep(5 * time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Println(time.Now())
 
 	for o := 0; o < workerCount; o++ {
@@ -119,7 +120,7 @@ func TestChanPutGet2_Owait_withSmallBuffer(t *testing.T) {
 func TestChanPutGet2_OFirst_withBuffer(t *testing.T) {
 	intCh := make(chan int, 10) //创建一个带size的channel（带buffer）,最多能装10个数
 	workerCount := 10
-	for o := 0; o < workerCount; o++ {
+	for o := 0; o < 10; o++ {
 		go func(o int) {
 			out := <-intCh
 			fmt.Printf("%s, 出%d拿到%d\n", time.Now(), o, out)
@@ -127,7 +128,7 @@ func TestChanPutGet2_OFirst_withBuffer(t *testing.T) {
 	}
 
 	fmt.Println(time.Now())
-	time.Sleep(5 * time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Println(time.Now())
 
 	for i := 0; i < workerCount; i++ {

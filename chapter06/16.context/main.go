@@ -7,10 +7,10 @@ import (
 )
 
 func main() {
-	// withCancel()
+	withCancel()
 	//withTimeout()
 	//withValue()
-	withDeadline()
+	//withDeadline()
 }
 
 //withDeadline()
@@ -69,7 +69,9 @@ func game(ctx context.Context) {
 
 // withValue---------------------
 func withValue() {
-	ctx := context.WithValue(context.TODO(), "1", "钱包")
+	//ctx := context.TODO()
+	//ctx = context.WithValue(ctx,"1","钱包")
+	ctx := context.WithValue(context.TODO(), "1", "钱包") //简写
 	go func(ctx context.Context) {
 		time.Sleep(1 * time.Second)
 		fmt.Println("withValue: 1", ctx.Value("1"))
@@ -118,7 +120,7 @@ func goToGrandma(ctx context.Context) {
 }
 
 func goToParty(ctx context.Context) {
-	fmt.Println("goToParty:1", ctx.Value("1"))
+	fmt.Println("goToParty:1", ctx.Value("1")) //ctx.Value(key:X) 通过Value(key)拿到对应的值
 	fmt.Println("goToParty:2", ctx.Value("2"))
 	fmt.Println("goToParty:3", ctx.Value("3"))
 	fmt.Println("goToParty:4", ctx.Value("4"))
@@ -179,7 +181,7 @@ func distributeCover(ctx context.Context) {
 
 // withCancel -------------------
 func withCancel() {
-	ctx := context.TODO()
+	ctx := context.TODO() // TO DO()的返回值是Context,他是个接口，Context接口中有 Deadline(), Done(), Err(), Value 方法
 	ctx, cancel := context.WithCancel(ctx)
 	fmt.Println("做蛋挞，要买材料")
 	go buyFlour(ctx)
@@ -187,7 +189,7 @@ func withCancel() {
 	go buyEgg(ctx)
 	time.Sleep(500 * time.Millisecond)
 	fmt.Println("没电了，取消购买所有食材")
-	cancel() // 当调用 cancel 后，所有由此上下文衍生出的context都会cancel
+	cancel() // 当调用 cancel 方法 后，所有由此上下文衍生出的context都会cancel
 	time.Sleep(1 * time.Second)
 }
 
@@ -217,8 +219,11 @@ func buyOil(ctx context.Context) {
 
 func buyEgg(ctx1 context.Context) {
 	ctx, _ := context.WithCancel(ctx1) //从ctx1中又衍生了一个ctx
-	//defer cancel() // 无论是否调用衍生出来的ctx的cancel，Done返回的channel都会关闭。
 	fmt.Println("去买蛋")
+
+	//defer cancel() // 无论是否调用衍生出来的ctx的cancel，Done返回的channel都会关闭。
+	go buySEgg(ctx)
+	go buyBEgg(ctx)
 	time.Sleep(1 * time.Second)
 	select {
 	case <-ctx.Done():
@@ -226,10 +231,9 @@ func buyEgg(ctx1 context.Context) {
 		return
 	default:
 	}
-	fmt.Println("买到蛋")
-	go buySEgg(ctx)
-	go buyBEgg(ctx)
+
 	time.Sleep(1 * time.Second)
+	fmt.Println("买到蛋")
 }
 
 func buySEgg(ctx context.Context) {
