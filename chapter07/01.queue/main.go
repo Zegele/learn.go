@@ -1,5 +1,6 @@
 package main
 
+//先进先出 类似羽毛球桶
 import (
 	"fmt"
 	"sync"
