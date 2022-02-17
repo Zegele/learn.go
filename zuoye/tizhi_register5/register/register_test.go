@@ -99,5 +99,4 @@ func TestFromToRank(t *testing.T) {
 		v, ok := sMap.Load(allm.Members[i].Name)
 		fmt.Printf("%s的排名是：%d。 %t\n", allm.Members[i].Name, v, ok)
 	}
-
 }
