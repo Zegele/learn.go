@@ -102,9 +102,11 @@ func deleteNode(root *LinkNode, v int) *LinkNode {
 }
 
 func deleteNodeZiJi(root *LinkNode, v int) *LinkNode {
+
 	if root == nil {
 		return nil
 	}
+
 	if root.data == v { // 要删除的数据在第一个节点（有两种情况，1.链表有多个节点；2.链表只有一个节点）
 		if root.next != nil {
 			leftHand := root
@@ -133,8 +135,12 @@ func deleteNodeZiJi(root *LinkNode, v int) *LinkNode {
 			}
 		}
 		tmpNode = tmpNode.next
+		if tmpNode.next == nil { //找遍了所有的节点，都没有匹配的数，就返回原链表
+			fmt.Println("没有找到要删除的数字对应的节点")
+			return root
+		}
 	}
-	return root
+
 }
 
 func rangeLink(root *LinkNode) {
@@ -149,14 +155,14 @@ func rangeLink(root *LinkNode) {
 		tmpNode = tmpNode.next
 	}
 
-	fmt.Println("从尾到头")
-	for {
-		fmt.Println(tmpNode.data)
-		if tmpNode.previous == nil {
-			break
-		}
-		tmpNode = tmpNode.previous
-	}
+	//fmt.Println("从尾到头")
+	//for {
+	//	fmt.Println(tmpNode.data)
+	//	if tmpNode.previous == nil {
+	//		break
+	//	}
+	//	tmpNode = tmpNode.previous
+	//}
 }
 
 func main() {
@@ -171,12 +177,24 @@ func main() {
 	rangeLink(root)
 
 	fmt.Println("删除节点")
+	fmt.Println("删除第一个节点：")
 	root = deleteNodeZiJi(root, -1) // 删除第一个
-	root = deleteNodeZiJi(root, 3)  // 删除中间的
+	rangeLink(root)
+
+	fmt.Println("删除中间节点：")
+	root = deleteNodeZiJi(root, 3) // 删除中间的
+	rangeLink(root)
+
+	fmt.Println("删除最后一个节点")
 	root = deleteNodeZiJi(root, 11) // 删除最后一个
-	//root = deleteNodeZiJi(root, 4)  //删除不存在的
+	rangeLink(root)
+
+	fmt.Println("删除不存在的节点")
+	root = deleteNodeZiJi(root, 4) //删除不存在的
+	rangeLink(root)
+
 	//root = deleteNode(root, -1)
 	//root = deleteNode(root, 3)
 	//root = deleteNode(root, 11)
-	rangeLink(root)
+	//rangeLink(root)
 }
