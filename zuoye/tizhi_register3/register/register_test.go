@@ -97,7 +97,7 @@ func TestFromToRank(t *testing.T) {
 	allm.GetMap(sMap, 2)
 	for i := 0; i < 2; i++ {
 		v, ok := sMap.Load("a" + fmt.Sprint(i))
-		fmt.Printf("%s的排名是：%d。 %t\n", "a"+fmt.Sprint(i), v, ok)
+		fmt.Printf("%s的排名是：%d。 %teacher\n", "a"+fmt.Sprint(i), v, ok)
 	}
 
 }

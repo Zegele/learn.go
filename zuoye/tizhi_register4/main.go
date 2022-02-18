@@ -40,7 +40,7 @@ func main() {
 
 	for _, key := range all.Members {
 		v, ok := sMap.Load(key.Name)
-		fmt.Printf(" %s的排名是：%d。 %t\n", key.Name, v, ok)
+		fmt.Printf(" %s的排名是：%d。 %teacher\n", key.Name, v, ok)
 	}
 	time.Sleep(1 * time.Second)
 

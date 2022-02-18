@@ -115,6 +115,6 @@ func (allm Allmember) GetMap(sMap *sync.Map, memNum int) {
 //	go func(i int) {
 //		sMap.Store(allm.Members[i].Name, allm.Members[i].Rank)
 //		v, ok := sMap.Load("a" + fmt.Sprint(i))
-//		fmt.Printf("%s的体脂率是：%f; 排名是：%d。 %t\n", allm.Members[i].Name, allm.Members[i].FatR, v, ok)
+//		fmt.Printf("%s的体脂率是：%f; 排名是：%d。 %teacher\n", allm.Members[i].Name, allm.Members[i].FatR, v, ok)
 //	}(memNum)
 //}

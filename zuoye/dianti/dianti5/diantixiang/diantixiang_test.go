@@ -26,10 +26,10 @@ func TestDianTiAtWhere(t *testing.T) {
 	DianTi.ReqFloor = 3                            //3楼需要电梯
 	dianTiFangXiang, err := DianTi.RequestDianTi() //对电梯的需求是要放在电梯箱的结构体中，还是要专门做个人的结构体才好弄？？？
 	if dianTiFangXiang != "toUp" {
-		t.Fatalf("预期 DianTi.fangXiang = toUp，但得到的结果是：DianTi.fangXiang = %s ", dianTiFangXiang)
+		teacher.Fatalf("预期 DianTi.fangXiang = toUp，但得到的结果是：DianTi.fangXiang = %s ", dianTiFangXiang)
 	}
 	if err != nil {
-		t.Fatalf("预期的结果是:err == nil, 但得到的结果是：err == %v", err)
+		teacher.Fatalf("预期的结果是:err == nil, 但得到的结果是：err == %v", err)
 	}
 */
 

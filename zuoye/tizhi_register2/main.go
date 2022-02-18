@@ -33,6 +33,6 @@ func main() {
 	all.GetMap(sMap, totalMember)
 	for i := 0; i < totalMember; i++ {
 		v, ok := sMap.Load("a" + fmt.Sprint(i))
-		fmt.Printf("%s的体脂率是：%f; 排名是：%d。 %t\n", all.Members[i].Name, all.Members[i].FatR, v, ok)
+		fmt.Printf("%s的体脂率是：%f; 排名是：%d。 %teacher\n", all.Members[i].Name, all.Members[i].FatR, v, ok)
 	}
 }

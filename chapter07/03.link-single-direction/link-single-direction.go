@@ -81,17 +81,17 @@ func main() {
 		rangeLink(ne)
 	}
 
-	//{
-	//	fmt.Println("测试nil节点")
-	//	var n *LinkNode //没有初始化（实例化）的Node是没法用的。
-	//	n10 := &LinkNode{
-	//		data: 10,
-	//		next: nil,
-	//	}
-	//	fmt.Println(n)
-	//	insertNode(n, n10)
-	//	rangeLink(n)
-	//}
+	{
+		fmt.Println("测试nil节点")
+		var n *LinkNode //没有初始化（实例化）的Node是没法用的。
+		n10 := &LinkNode{
+			data: 10,
+			next: nil,
+		}
+		fmt.Println(n)
+		insertNode(n, n10)
+		rangeLink(n)
+	}
 	{
 		fmt.Println("删除节点")
 		n1 = deleteNode(n1, 3)
@@ -115,10 +115,12 @@ func rangeLink(root *LinkNode) {
 
 func insertNode(root *LinkNode, newNode *LinkNode) *LinkNode {
 	tmpNode := root
-	if newNode.data < root.data {
-		newNode.next = root
+
+	if tmpNode != nil && newNode.data < tmpNode.data { //给第一之前加节点
+		newNode.next = tmpNode
 		return newNode
 	}
+
 	for {
 		if tmpNode != nil {
 			if newNode.data > tmpNode.data {
@@ -134,6 +136,7 @@ func insertNode(root *LinkNode, newNode *LinkNode) *LinkNode {
 				}
 			}
 		} else { //如果节点是nil的情况 newNode 成为链的第一个
+			fmt.Println("该链表是nil", root)
 			break
 		}
 		tmpNode = tmpNode.next

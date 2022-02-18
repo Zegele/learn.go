@@ -9,7 +9,7 @@ func TestCalcBMI(t *testing.T) {
 	{
 		t_bmi1, err := CalcBMI(1.8, 65.0)
 		if t_bmi1 != 0.20 {
-			t.Fatalf("预期bmi结果为0.20，但是得到：%f", t_bmi1) //t.Fatal 失败，并退出
+			t.Fatalf("预期bmi结果为0.20，但是得到：%f", t_bmi1) //teacher.Fatal 失败，并退出
 		}
 		if err != nil {
 			t.Fatalf("预期err结果为nil，但是得到：%v", err)

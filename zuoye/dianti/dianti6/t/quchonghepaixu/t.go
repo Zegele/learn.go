@@ -33,7 +33,7 @@ func main() {
 	//bigToSmall := SliceBigToSmall(smallToBig)
 	//fmt.Println(bigToSmall)
 	var t int
-	fmt.Println("t", t)
+	fmt.Println("teacher", t)
 
 }
 

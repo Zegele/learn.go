@@ -49,6 +49,6 @@ func main() {
 	//time.Sleep(5 * time.Second)
 	for i, key := range all.Members {
 		v, ok := sMap.Load(key.Name)
-		fmt.Printf("%d: %s的体脂率是：%f; 排名是：%d。 %t\n", i, key.Name, key.FatR, v, ok)
+		fmt.Printf("%d: %s的体脂率是：%f; 排名是：%d。 %teacher\n", i, key.Name, key.FatR, v, ok)
 	}
 }

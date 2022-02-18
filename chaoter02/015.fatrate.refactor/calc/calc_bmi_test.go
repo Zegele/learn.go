@@ -15,6 +15,6 @@ func TestCalcBMI(t *testing.T) {
 	}
 	if expectedOutput != actualOutput {
 		t.Errorf("expecting %f, but got %f", expectedOutput, actualOutput)
-		//t.Fail() 也可以用 t.Fail()
+		//teacher.Fail() 也可以用 teacher.Fail()
 	}
 }

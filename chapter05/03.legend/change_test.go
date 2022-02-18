@@ -34,7 +34,7 @@ func TestVal(t *testing.T) {
 	fmt.Println(stdChg)
 }
 
-// func TestStd(t *testing.T){
+// func TestStd(teacher *testing.T){
 // 	s := Student{Name:"Tom"}
 // fmt.Println(s.Name)
 // s.ChangeName("Jerry")
