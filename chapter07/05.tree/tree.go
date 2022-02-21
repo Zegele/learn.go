@@ -76,21 +76,22 @@ func deleteNode(root *Node, v int) *Node {
 		deleteNode(root.left, v)
 	} else if v > root.data {
 		deleteNode(root.right, v)
-	} else {
-		//现在root指向要删除的节点
-		leftNextGen := findNextGenFromLeft(root.left)    //找到左支最右边的数
-		rightNextGen := findNextGenFromRight(root.right) //找到右支最左边的数
+	} else { // v == root.data 就说明该root是要删除的节点
+		//现在root指向要删除的节点 这时候的root 就是 要删除的节点
+		//下一步找后继节点
+		leftNextGen := findNextGenFromLeft(root.left)    //找到左支最右边的节点
+		rightNextGen := findNextGenFromRight(root.right) //找到右支最左边的节点
 		if leftNextGen == nil && rightNextGen == nil {
 			//现在要删除的是叶子节点，即最底部的节点
 			top := root.root
 			down := root
 			if top.left == down { //结构体可以这样比较？？？
-				//表示是左子树//是左？
+				//表示是左子树//只是上一层的左子树，并不是整体的左数
 				top.left = nil
 				down.root = nil
 				return nil
 			} else {
-				//表示是右子树//是右？
+				//表示是右子树
 				top.right = nil
 				down.root = nil
 				return nil
@@ -108,11 +109,11 @@ func deleteNode(root *Node, v int) *Node {
 	return root
 }
 
-func findNextGenFromLeft(root *Node) *Node {
-	if root == nil {
+func findNextGenFromLeft(rootLeft *Node) *Node { //rootleft是要删除节点的left
+	if rootLeft == nil {
 		return nil
 	}
-	tmpNode := root
+	tmpNode := rootLeft
 	for {
 		if tmpNode.right != nil {
 			tmpNode = tmpNode.right
@@ -123,11 +124,11 @@ func findNextGenFromLeft(root *Node) *Node {
 	return tmpNode // return的tmpNode没有right
 }
 
-func findNextGenFromRight(root *Node) *Node {
-	if root == nil {
+func findNextGenFromRight(rootRight *Node) *Node {
+	if rootRight == nil {
 		return nil
 	}
-	tmpNode := root
+	tmpNode := rootRight
 	for {
 		if tmpNode.left != nil {
 			tmpNode = tmpNode.left

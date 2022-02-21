@@ -50,19 +50,19 @@ func quickSort(arr *[]int, start, end int) {
 }
 
 func main() {
-	arrSize := 10
+	arrSize := 10000000 //一千万个数0.5秒
 	arr := []int{}
 	rand.Seed(time.Now().UnixNano())
 	for i := 0; i < arrSize; i++ {
 		arr = append(arr, rand.Intn(50))
 	}
-	fmt.Println("初始数组：", arr)
+	//fmt.Println("初始数组：", arr)
 
 	start := time.Now()
 	quickSort(&arr, 0, arrSize-1)
 	finish := time.Now()
 	fmt.Println(finish.Sub(start))
-	fmt.Println("最终数组：", arr)
+	//fmt.Println("最终数组：", arr)
 }
 
 // 1 5 3 4 5 1 2 9 6

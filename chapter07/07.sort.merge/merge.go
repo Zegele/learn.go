@@ -42,7 +42,7 @@ func mergeSli(left, right []int) []int {
 }
 
 func main() {
-	SliSize := 10
+	SliSize := 10000000 //一千万个数3.6秒
 	sli := []int{}
 	rand.Seed(time.Now().UnixNano()) //随机种子
 	for i := 0; i < SliSize; i++ {
