@@ -1,0 +1,21 @@
+{"name":"1","sex":"男","tall":1.8,"weight":70,"age":30}{"name":"2","sex":"男","tall":1.9,"weight":70,"age":31}{"name":"3","sex":"男","tall":1.5,"weight":100,"age":35}{"name":"4","sex":"男","tall":1.9,"weight":80,"age":38}
+{"name":"5","sex":"女","tall":1.73,"weight":50,"age":20}
+{"name":"6","sex":"女","tall":1.73,"weight":45,"age":18}
+
+{//Json嵌套
+ "age": "18"
+ "selfShow":[//如果只有一个嵌套可以不用中括号
+    {
+        "timeStamp":"",
+        "message":""
+    },
+    {
+        "timeStamp":"",
+        "message":""
+    }
+   ]
+}
+{"name":"xiao1","sex":"男","tall":1.8,"weight":70,"age":33}
+{"name":"xiao2","sex":"男","tall":1.85,"weight":75,"age":34}
+{"name":"xiao1","sex":"男","tall":1.73,"weight":65,"age":32}
+{"name":"xiao2","sex":"男","tall":1.8,"weight":70,"age":33}

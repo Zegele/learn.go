@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package apis;
+
+option go_package = "../apis";
+
+message PersonalInfomationList{
+  repeated PersonalInfomation items = 1;
+}
+
+message PersonalInfomation{
+  string name = 1;//字段序号
+  string sex = 2;
+  float tall = 3;
+  float weight = 4;
+  int64 age = 5;
+
+}
