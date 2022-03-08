@@ -46,8 +46,8 @@ func main() {
 		}
 		/*
 			for {
-				fmt.Scanln(&person.age)
-				if person.age < 18 || person.age > 150 {
+				fmt.Scanln(&client.age)
+				if client.age < 18 || client.age > 150 {
 					fmt.Print("抱歉，不在符合的年龄范围，请输入18-150的整数：")
 				} else {
 					break
@@ -77,8 +77,8 @@ func main() {
 		}
 		/*
 			for {
-				fmt.Scanln(&person.weight)
-				if person.weight < 20 || person.weight > 1000 {
+				fmt.Scanln(&client.weight)
+				if client.weight < 20 || client.weight > 1000 {
 					fmt.Println("抱歉，体重不在计算区间，请输入20-1000之间的数。")
 				} else {
 					break
@@ -140,7 +140,7 @@ func main() {
 				}
 			}
 			person.suggest = sug //给结构体对象suggest赋值
-		} else { //person.sexval == 0.0 女
+		} else { //client.sexval == 0.0 女
 			if person.age >= 18 || person.age < 40 {
 				switch {
 				case nbfr > 0.0 && nbfr <= 0.2:

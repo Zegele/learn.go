@@ -49,7 +49,7 @@ func BfrSuggest(bfr float64, sexval float64, age int) (sug string) {
 			}
 		}
 		return sug
-	} else { //person.sexval == 0.0 女
+	} else { //client.sexval == 0.0 女
 		if age >= 18 || age < 40 {
 			switch {
 			case bfr > 0.0 && bfr <= 0.2:

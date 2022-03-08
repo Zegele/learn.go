@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package apis;
+
+option go_package = "../apii";
+
+message Person{
+  string name =1;
+  string sex = 2;
+  int64 age = 3;
+  float tall = 4;
+  float weight =5;
+      float fatr = 6;
+}
+
+message Persons{
+  repeated Person items = 1;// items 是字段
+}
+
+message RankItem{
+  string name=1;
+  float fatr = 2;
+  int64 rank = 3;
+}
+
+message Rank{
+  repeated RankItem itemsS = 1;
+}
