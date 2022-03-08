@@ -85,10 +85,10 @@ func InputTall(p *apii.Person) *apii.Person { //输入身高
 func (*InputData) Register(number int, c chan *apii.Person) (p *apii.Person) { //第一步：把数据注入channel
 	p = &apii.Person{}
 	p.Name = "a" + fmt.Sprint(number)
-	p.Age = 10 + int64(number)
+	p.Age = 150 - int64(number) // 这里是极端的身体数据
 	p.Sex = "男"
-	p.Tall = 1.8
-	p.Weight = 70
+	p.Tall = 0.5 + float32(number)/100
+	p.Weight = 1000.0 - float32(number)
 	c <- p
 	return
 }

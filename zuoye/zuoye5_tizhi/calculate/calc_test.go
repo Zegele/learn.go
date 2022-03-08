@@ -17,4 +17,8 @@ func TestCalc(t *testing.T) {
 	}
 	p = cal.CalcFatRate(p)
 	fmt.Println(p)
+	bmi := 70 / (1.8 * 1.8) / 100
+	fatr := (bmi*100*1.2 + 0.23*18 - 5.4 - 10.8) / 100
+	fmt.Println(bmi)
+	fmt.Println(fatr)
 }

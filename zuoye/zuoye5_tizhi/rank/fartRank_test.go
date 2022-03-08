@@ -19,7 +19,7 @@ func TestRank(t *testing.T) {
 		Name: "b", //注意这里是逗号
 		Fatr: 0.2,
 	}
-	var fr FR
+	fr := &FR{}
 	ps := &apii.Persons{}
 	fr.appendSliceFromPerson(person, ps)
 	fmt.Println("测试写入Persons:", ps) // 测试写入rankItem

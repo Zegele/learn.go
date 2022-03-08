@@ -11,6 +11,7 @@ import (
 //排序
 
 type FR struct {
+	num int
 }
 
 //生成Prosons

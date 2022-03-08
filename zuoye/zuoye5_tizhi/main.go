@@ -25,6 +25,7 @@ func main() {
 	// 注册信息和计算体脂率
 	for i := 0; i < allPerson; i++ { //client生成 apii.Person
 		go cal.CalcFatRate(input.Register(i, registerChan)) //input.Register 注入基本信息， cal.CalcFatRate计算fatr（体脂率），完善apii.Person整体信息。
+		//这里批量生成了极端的身体数据
 	}
 	time.Sleep(1 * time.Second)
 	close(registerChan)
@@ -37,13 +38,14 @@ func main() {
 	input.WriteClientByJSON(filePathBuHuanHang, ps)       // 把client的基本信息写入（保存）到文件。
 	input.WriteClientByProtobuf(filePathProtobuf, ps)     // 把client的基本信息写入（保存）到文件。
 	//input.WriteClientByJSON(filePathBuHuanHang, ps)
-	// 排序
 
+	// 生成排序数据
 	unmarshalPs := fr.ReadProtoFile(filePathProtobuf)
-	// 排序阶段
 	rs := fr.MakeRank(unmarshalPs)
-	//fr.PaiXuBubble(rs)
-	fr.PaiXuQuick(rs, 0, len(rs.ItemsS)-1)
+
+	// 排序阶段
+	//fr.PaiXuBubble(rs) //冒泡
+	fr.PaiXuQuick(rs, 0, len(rs.ItemsS)-1) //快排
 
 	RankFileWritePathByJSON := "E:/Geek/src/learn.go/zuoye/zuoye5_tizhi/rankhuanhang.json"
 	RankFileWritePathByPROTOBUF := "E:/Geek/src/learn.go/zuoye/zuoye5_tizhi/rank.protobuf"
