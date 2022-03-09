@@ -117,12 +117,12 @@ type fatRateSuggestion struct {
 	suggArr [][][]int
 }
 
-func (s *fatRateSuggestion) GetSuggestion(person *Person) string {
-	sexIdx := s.getIndexOfSex(person.sex)
-	ageIdx := s.getIndexOfAge(person.age)
+func (s *fatRateSuggestion) GetSuggestion(client *Person) string {
+	sexIdx := s.getIndexOfSex(client.sex)
+	ageIdx := s.getIndexOfAge(client.age)
 
 	maxFRSupported := len(s.suggArr[sexIdx][ageIdx]) - 1
-	frIdx := int(person.fatRate * 100)
+	frIdx := int(client.fatRate * 100)
 	if frIdx > maxFRSupported {
 		frIdx = maxFRSupported
 	}

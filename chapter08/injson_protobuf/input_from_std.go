@@ -11,6 +11,7 @@ type inputFromStd struct {
 func (inputFromStd) GetInput() *apis.PersonalInfomation {
 	//录入各项
 	var name string
+
 	fmt.Print("姓名：")
 	fmt.Scanln(&name)
 
