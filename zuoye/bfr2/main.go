@@ -23,7 +23,7 @@ import (
 /*
 项目A:
 	a文件夹:
-		main.go
+		types.go
 	b文件夹:
 		bb.go
 	c文件夹:

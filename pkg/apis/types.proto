@@ -9,10 +9,15 @@ message PersonalInfomationList{
 }
 
 message PersonalInfomation{
+  // @gotags: gorm:"column:name"
   string name = 1; //字段序号
+  // @gotags: gorm:"column:sex"
   string sex = 2;
+  // @gotags: gorm:"column:tall"
   float tall = 3;
+  // @gotags: gorm:"column:weight"
   float weight = 4;
+  // @gotags: gorm:"column:age"
   int64 age = 5;
 
 }

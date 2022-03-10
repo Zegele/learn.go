@@ -25,7 +25,7 @@ type PersonalInfomationList struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Items []*PersonalInfomation `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
+	Items []*PersonalInfomation `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"` //重复 这就是切片类型？
 }
 
 func (x *PersonalInfomationList) Reset() {
@@ -72,11 +72,16 @@ type PersonalInfomation struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name   string  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"` //字段序号
-	Sex    string  `protobuf:"bytes,2,opt,name=sex,proto3" json:"sex,omitempty"`
-	Tall   float32 `protobuf:"fixed32,3,opt,name=tall,proto3" json:"tall,omitempty"`
-	Weight float32 `protobuf:"fixed32,4,opt,name=weight,proto3" json:"weight,omitempty"`
-	Age    int64   `protobuf:"varint,5,opt,name=age,proto3" json:"age,omitempty"`
+	// @gotags: gorm:"column:name"
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty" gorm:"column:name"` //字段序号
+	// @gotags: gorm:"column:sex"
+	Sex string `protobuf:"bytes,2,opt,name=sex,proto3" json:"sex,omitempty" gorm:"column:sex"`
+	// @gotags: gorm:"column:tall"
+	Tall float32 `protobuf:"fixed32,3,opt,name=tall,proto3" json:"tall,omitempty" gorm:"column:tall"`
+	// @gotags: gorm:"column:weight"
+	Weight float32 `protobuf:"fixed32,4,opt,name=weight,proto3" json:"weight,omitempty" gorm:"column:weight"`
+	// @gotags: gorm:"column:age"
+	Age int64 `protobuf:"varint,5,opt,name=age,proto3" json:"age,omitempty" gorm:"column:age"`
 }
 
 func (x *PersonalInfomation) Reset() {
