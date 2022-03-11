@@ -69,9 +69,9 @@ func readFile(filePath string) {
 	}
 	fmt.Println("读取出来的内容是：", string(data))
 	//	infos := strings.Split(string(data), ",") //表示数据遇到 ","(逗号)，分割开。(小强，男 --> 小强 男) 分隔开就可以struct等使用。
-
+	fmt.Print(string(data))
 	personalInfomation := apis.PersonalInfomation{}
-	json.Unmarshal(data, &personalInfomation) // 把json格式的data，转成go的对象格式，并存入该对象中。
+	json.Unmarshal(data, &personalInfomation) // 把读到的json格式的data，转成go的对象格式，并存入该对象中。
 
 	fmt.Println("开始计算体脂信息：", personalInfomation)
 	bmi, _ := gobmi.BMI(float64(personalInfomation.Weight), float64(personalInfomation.Tall)) // todo handle error

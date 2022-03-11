@@ -26,6 +26,7 @@ type record struct {
 
 func (r *record) savePersonalInfomation(pi *apis.PersonalInfomation) error {
 	{ //JSON
+		//marshal 一个人，然后write进一个人，同时写的时候换行。Unmarshal可以正常读取。
 		data, err := json.Marshal(pi) //把pi数据转成json格式
 		if err != nil {
 			fmt.Println("marshal 出错：", err)
