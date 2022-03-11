@@ -1,9 +1,12 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"io"
 	"log"
 	"net"
+	"time"
 )
 
 var qa = map[string]string{
@@ -15,7 +18,13 @@ var qa = map[string]string{
 }
 
 func main() {
-	ln, err := net.Listen("tcp", ":8080") //tcp: Transfer Control Protocol 传输控制协议;
+	var port string                                 // port（端口）
+	flag.StringVar(&port, "port", "8080", "配置启动端口") // 什么意思？？？ 给参数port赋值 默认8080
+	// ./server --port=8081 设置端口的命令参数
+	flag.Parse() //把端口绑进去
+
+	//	ln, err := net.Listen("tcp", ":8080") //tcp: Transfer Control Protocol 传输控制协议; 只有8080端口
+	ln, err := net.Listen("tcp", ":"+port) //tcp: Transfer Control Protocol 传输控制协议; tcp+端口号。
 
 	if err != nil {
 		log.Fatal(err)
@@ -28,17 +37,23 @@ func main() {
 		}
 		fmt.Println(conn)
 
-		go talk(conn)
+		//talk(conn)//如果只是调用这个函数，就会随主函数只执行一次。
+		go talk(conn) //加深理解goroutine 每调用一次，都会有个goroutine
 	}
 }
 
 func talk(conn net.Conn) {
+	defer fmt.Println("结束链接：", conn)
 	defer conn.Close()
 
 	for {
 		buf := make([]byte, 1024)
 		valid, err := conn.Read(buf)
 		if err != nil {
+			if err == io.EOF { // 如果不加这个，会一直报错EOF，如果加上会睡一秒，然后continue
+				time.Sleep(1 * time.Second)
+				continue
+			}
 			log.Println("WARNING：读取数据失败：", err)
 			continue
 		}
@@ -50,5 +65,8 @@ func talk(conn net.Conn) {
 			continue
 		}
 		conn.Write([]byte(resp))
+		if string(content) == "再见" {
+			break
+		}
 	}
 }
