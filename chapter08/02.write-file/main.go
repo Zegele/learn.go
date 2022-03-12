@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	filePath := "e:/Geek/src/learn.go/chapter08/02.orm.write-file/小强.txt"
+	filePath := "e:/Geek/src/learn.go/chapter08/02.write-file/小强.txt"
 	//filePath := "e://Geek//src//learn.go//chapter08//01.read-file//小强.txt"
 	//filePath := "e:\\Geek\\src\\learn.go\\chapter08\\01.read-file\\小强.txt"
 	//writeFile(filePath)
