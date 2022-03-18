@@ -305,14 +305,14 @@ func file_standard_proto_rawDescGZIP() []byte {
 
 var file_standard_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_standard_proto_goTypes = []interface{}{
-	(*Person)(nil),   // 0: apis.Person
-	(*Persons)(nil),  // 1: apis.Persons
-	(*RankItem)(nil), // 2: apis.RankItem
-	(*Rank)(nil),     // 3: apis.Rank
+	(*Person)(nil),   // 0: apiss.Person
+	(*Persons)(nil),  // 1: apiss.Persons
+	(*RankItem)(nil), // 2: apiss.RankItem
+	(*Rank)(nil),     // 3: apiss.Rank
 }
 var file_standard_proto_depIdxs = []int32{
-	0, // 0: apis.Persons.items:type_name -> apis.Person
-	2, // 1: apis.Rank.itemsS:type_name -> apis.RankItem
+	0, // 0: apiss.Persons.items:type_name -> apiss.Person
+	2, // 1: apiss.Rank.itemsS:type_name -> apiss.RankItem
 	2, // [2:2] is the sub-list for method output_type
 	2, // [2:2] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name

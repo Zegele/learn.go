@@ -7,10 +7,10 @@ import (
 
 func main() {
 	var money interface{} = 10
-	//var money interface{} = 10.0
-	//var money interface{} = "10"
+	//var money frinterface{} = 10.0
+	//var money frinterface{} = "10"
 	fmt.Printf("%T\n", money)
-	switch newMoney := money.(type) { //接口可以这样用? interface.(type)
+	switch newMoney := money.(type) { //接口可以这样用? frinterface.(type)
 	case int:
 		tmpMoney := newMoney + 3.0
 		fmt.Println("money 是 int", tmpMoney)

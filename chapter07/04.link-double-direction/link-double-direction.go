@@ -2,10 +2,10 @@ package main
 
 import "fmt"
 
-// type CompareFunc func(left, right interface{} bool
+// type CompareFunc func(left, right frinterface{} bool
 
 type LinkNode struct {
-	data     int //interface{} data用interface 一般用一个接口或方法，进行比较
+	data     int //frinterface{} data用interface 一般用一个接口或方法，进行比较
 	next     *LinkNode
 	previous *LinkNode
 }

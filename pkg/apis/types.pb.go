@@ -185,11 +185,11 @@ func file_types_proto_rawDescGZIP() []byte {
 
 var file_types_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_types_proto_goTypes = []interface{}{
-	(*PersonalInfomationList)(nil), // 0: apis.PersonalInfomationList
-	(*PersonalInfomation)(nil),     // 1: apis.PersonalInfomation
+	(*PersonalInfomationList)(nil), // 0: apiss.PersonalInfomationList
+	(*PersonalInfomation)(nil),     // 1: apiss.PersonalInfomation
 }
 var file_types_proto_depIdxs = []int32{
-	1, // 0: apis.PersonalInfomationList.items:type_name -> apis.PersonalInfomation
+	1, // 0: apiss.PersonalInfomationList.items:type_name -> apiss.PersonalInfomation
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

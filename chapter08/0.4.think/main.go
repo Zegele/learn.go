@@ -13,7 +13,7 @@ import (
 func main() {
 	// 10 万条记录
 	counter := 10
-	persons := make([]*apis.PersonalInfomation, 0, counter) //[]*apis.PersonalInfomation 是这种类型的切片啊！
+	persons := make([]*apis.PersonalInfomation, 0, counter) //[]*apiss.PersonalInfomation 是这种类型的切片啊！
 	for i := 0; i < counter; i++ {
 		persons = append(persons, &apis.PersonalInfomation{
 			Name:   "123",

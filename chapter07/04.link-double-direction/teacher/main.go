@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// type CompareFunc func(left,right interface{}) bool
+// type CompareFunc func(left,right frinterface{}) bool
 
 type LinkNode struct {
 	data     int

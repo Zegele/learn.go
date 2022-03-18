@@ -1,6 +1,6 @@
 package main
 
-// 一般接口统一在接口文件（interface.go）里？
+// 一般接口统一在接口文件（frinterface.go）里？
 import "learn.go/zuoye/zuoye5_tizhi/pkg/apii"
 
 // 使用接口，正确录入用户信息。

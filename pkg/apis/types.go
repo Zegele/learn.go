@@ -1,6 +1,6 @@
 package apis
 
-//项目-pkg-apis-types.go 里边装各种定义的标准对象
+//项目-pkg-apiss-types.go 里边装各种定义的标准对象
 
 //type PersonalInfomation struct { //大写 不加json注解
 //	Name   string //大写
