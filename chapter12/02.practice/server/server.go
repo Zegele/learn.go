@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"learn.go/chapter12/02.practice/apiss"
-	"learn.go/chapter12/02.practice/frinterface"
-	"learn.go/chapter12/02.practice/server/rank"
+	"learn.go/chapter12/apiss"
+	"learn.go/chapter12/frinterface"
+	"learn.go/chapter12/rank"
 	"log"
 	"net/http"
 	"strings"
@@ -38,7 +38,7 @@ func main() {
 			return
 		}
 
-		var pi *apiss.PersonalInfomation
+		var pi *apiss.PersonalInformation
 		if err := json.Unmarshal(payload, &pi); err != nil { //把读取到的数据unmarshal解析
 			writer.WriteHeader(http.StatusBadRequest)
 			writer.Write([]byte(fmt.Sprintf("无法解析数据： %s", err)))
@@ -76,7 +76,7 @@ func main() {
 			return
 		}
 
-		var pi *apiss.PersonalInfomation
+		var pi *apiss.PersonalInformation
 		if err := json.Unmarshal(payload, &pi); err != nil { //把读取到的数据unmarshal解析
 			writer.WriteHeader(http.StatusBadRequest)
 			writer.Write([]byte(fmt.Sprintf("无法解析数据： %s", err)))

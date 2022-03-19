@@ -2,8 +2,8 @@ package rank
 
 import (
 	gobmi "github.com/armstrongli/go-bmi"
-	"learn.go/chapter12/02.practice/apiss"
-	"learn.go/chapter12/02.practice/frinterface"
+	"learn.go/chapter12/apiss"
+	"learn.go/chapter12/frinterface"
 	"log"
 	"math"
 	"sort"
@@ -23,7 +23,7 @@ type FatRateRank struct {
 	itemsLock sync.Mutex
 }
 
-func (r *FatRateRank) RegisterPersonalInformation(pi *apiss.PersonalInfomation) error {
+func (r *FatRateRank) RegisterPersonalInformation(pi *apiss.PersonalInformation) error {
 	bmi, err := gobmi.BMI(float64(pi.Weight), float64(pi.Tall))
 	if err != nil {
 		log.Println("计算BMI失败：", err)
@@ -34,7 +34,7 @@ func (r *FatRateRank) RegisterPersonalInformation(pi *apiss.PersonalInfomation) 
 	return nil
 }
 
-func (r *FatRateRank) UpdatePersonalInformation(pi *apiss.PersonalInfomation) (*apiss.PersonalInfomationFatRate, error) {
+func (r *FatRateRank) UpdatePersonalInformation(pi *apiss.PersonalInformation) (*apiss.PersonalInformationFatRate, error) {
 	bmi, err := gobmi.BMI(float64(pi.Weight), float64(pi.Tall))
 	if err != nil {
 		log.Println("计算BMI失败：", err)
@@ -43,7 +43,7 @@ func (r *FatRateRank) UpdatePersonalInformation(pi *apiss.PersonalInfomation) (*
 	fr := gobmi.CalcFatRate(bmi*100, pi.Age, pi.Sex)
 	r.InputRecord(pi.Name, pi.Sex, fr)
 	//rankID, fr := r.GetRank(pi.Name)
-	return &apiss.PersonalInfomationFatRate{
+	return &apiss.PersonalInformationFatRate{
 		Name:    pi.Name,
 		FatRate: fr,
 	}, nil

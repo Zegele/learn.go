@@ -2,12 +2,12 @@ package _interface
 
 import (
 	"crypto/rand"
-	"learn.go/chapter12/02.practice/apiss"
+	"learn.go/chapter12/apiss"
 	"math/big"
 )
 
 type Interface interface {
-	ReadPersonalInformation() (apiss.PersonalInfomation, error)
+	ReadPersonalInformation() (apiss.PersonalInformation, error)
 }
 
 var _ Interface = &FakeInterface{}
@@ -20,7 +20,7 @@ type FakeInterface struct {
 	Sex        string
 }
 
-func (f *FakeInterface) ReadPersonalInformation() (apiss.PersonalInfomation, error) {
+func (f *FakeInterface) ReadPersonalInformation() (apiss.PersonalInformation, error) {
 	r, _ := rand.Int(rand.Reader, big.NewInt(1000))
 	out := float64(r.Int64()) / 1000
 
@@ -28,7 +28,7 @@ func (f *FakeInterface) ReadPersonalInformation() (apiss.PersonalInfomation, err
 		out = 0 - out
 	}
 
-	pi := apiss.PersonalInfomation{
+	pi := apiss.PersonalInformation{
 		Name:   f.Name,
 		Sex:    f.Sex,
 		Tall:   f.BaseTall,

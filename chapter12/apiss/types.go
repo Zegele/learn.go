@@ -1,6 +1,6 @@
 package apiss
 
-type PersonalInfomation struct {
+type PersonalInformation struct {
 	Name   string  `json:"name"`
 	Sex    string  `json:"sex"`
 	Tall   float64 `json:"tall"`
@@ -8,7 +8,7 @@ type PersonalInfomation struct {
 	Age    int     `json:"age"`
 }
 
-type PersonalInfomationFatRate struct {
+type PersonalInformationFatRate struct {
 	Name    string
 	FatRate float64
 }
