@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package api;
+
+// unable to determine Go import path for "types.proto"
+// 出现上述错误，找不到路径，加入下面一行命令，再运行 protoc --go_out=. --plugin= types.proto ，则生成了types.pb.go文件。
+option go_package = "../api";
+
+
+//message PersonalShowList{
+//  repeated PersonalShow items = 1;
+//}
+
+message PersonalShow{
+  // @gotags: gorm:"column:id"
+  int64 id = 1;
+
+  // @gotags: gorm:"column:person_id"
+  int64 personID = 2;
+
+  // @gotags: gorm:"column:person_name"
+  string name = 3;
+
+//  // @gotags: gorm:"column:show_time"
+//  int64 showTime = 4;
+
+  string showDescription = 5;
+
+  // @gotags: gorm:"column:by_time_weight"
+  float weight = 6;
+
+  // @gotags: gorm:"column:by_time_tall"
+  float tall = 7;
+
+  // @gotags: gorm:"column:by_time_age"
+  int64 age = 8;
+
+  // @gotags: gorm:"column:visiable"
+  bool  visiable = 9;
+}
+
+//生成.pb.go文件：protoc --go_out=. --plugin= types.proto
+//生成gorm注释：protoc-go-inject-tag -input="*.pb.go"
