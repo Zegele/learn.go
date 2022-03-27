@@ -14,3 +14,7 @@ type ServeInterface interface {
 
 	GetTop() ([]*apiss.PersonalRank, error)
 }
+
+type RankInitInterface interface {
+	Init() error
+}

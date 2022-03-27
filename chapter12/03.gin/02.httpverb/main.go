@@ -8,14 +8,16 @@ import (
 	"learn.go/chapter12/apiss"
 	"learn.go/chapter12/frinterface"
 	"learn.go/chapter12/rank"
+	"log"
 	"net/http"
 )
 
 func main() {
 	var rankServer frinterface.ServeInterface = rank.NewFatRateRank()
+	//定义了一个接口，实现了FatRateRank 结构体，并将该结构体已经实例化
 
-	r := gin.Default()
-	pprof.Register(r)
+	r := gin.Default() // 这是在干什么？
+	pprof.Register(r)  //pprof可以查看内存，goroutine是否有泄露等。方便改进代码。
 
 	r.GET("/", func(c *gin.Context) {
 		c.Writer.Write([]byte(`你好，gin！`))
@@ -55,7 +57,11 @@ func main() {
 			return
 		}
 		c.Writer.WriteHeader(http.StatusOK)
-		c.Writer.Write([]byte(`success`))
+		i, err := c.Writer.Write([]byte(`success`))
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(string(i))
 
 		c.JSON(200, nil)
 	})

@@ -23,10 +23,6 @@ type FatRateRank struct {
 	itemsLock sync.Mutex
 }
 
-func NewFatRateRank() *FatRateRank { //实例化函数 要学会这样做
-	return &FatRateRank{items: make([]RankItem, 0, 100)}
-}
-
 func (r *FatRateRank) RegisterPersonalInformation(pi *apiss.PersonalInformation) error {
 	bmi, err := gobmi.BMI(float64(pi.Weight), float64(pi.Tall))
 	if err != nil {
@@ -34,7 +30,7 @@ func (r *FatRateRank) RegisterPersonalInformation(pi *apiss.PersonalInformation)
 		return err
 	}
 	fr := gobmi.CalcFatRate(bmi*100, int(pi.Age), pi.Sex)
-	r.InputRecord(pi.Name, pi.Sex, fr)
+	r.inputRecord(pi.Name, pi.Sex, fr)
 	return nil
 }
 
@@ -45,8 +41,7 @@ func (r *FatRateRank) UpdatePersonalInformation(pi *apiss.PersonalInformation) (
 		return nil, err
 	}
 	fr := gobmi.CalcFatRate(bmi*100, int(pi.Age), pi.Sex)
-	r.InputRecord(pi.Name, pi.Sex, fr)
-	//rankID, fr := r.GetRank(pi.Name)
+	r.inputRecord(pi.Name, pi.Sex, fr)
 	return &apiss.PersonalInformationFatRate{
 		Name:    pi.Name,
 		FatRate: fr,
@@ -54,11 +49,11 @@ func (r *FatRateRank) UpdatePersonalInformation(pi *apiss.PersonalInformation) (
 }
 
 func (r *FatRateRank) GetFatRate(name string) (*apiss.PersonalRank, error) {
-	rankID, sex, fr := r.getRank(name)
+	rankId, sex, fr := r.getRank(name)
 	return &apiss.PersonalRank{
 		Name:       name,
 		Sex:        sex,
-		RankNumber: rankID,
+		RankNumber: rankId,
 		FatRate:    fr,
 	}, nil
 }
@@ -67,10 +62,16 @@ func (r *FatRateRank) GetTop() ([]*apiss.PersonalRank, error) {
 	return r.getRankTop(), nil
 }
 
-func (r *FatRateRank) InputRecord(name, sex string, fatRate ...float64) {
+func NewFatRateRank() *FatRateRank {
+	return &FatRateRank{
+		items: make([]RankItem, 0, 100),
+	}
+}
+
+func (r *FatRateRank) inputRecord(name, sex string, fatRate ...float64) {
 	r.itemsLock.Lock()
 	defer r.itemsLock.Unlock()
-	minFatRate := math.MaxFloat64 // math.MaxFloat64是一个常量，它是最大的浮点数
+	minFatRate := math.MaxFloat64
 	for _, item := range fatRate {
 		if minFatRate > item {
 			minFatRate = item
@@ -88,7 +89,6 @@ func (r *FatRateRank) InputRecord(name, sex string, fatRate ...float64) {
 			break
 		}
 	}
-
 	if !found {
 		r.items = append(r.items, RankItem{
 			Name:    name,
@@ -101,9 +101,8 @@ func (r *FatRateRank) InputRecord(name, sex string, fatRate ...float64) {
 func (r *FatRateRank) getRank(name string) (rank int, sex string, fatRate float64) {
 	r.itemsLock.Lock()
 	defer r.itemsLock.Unlock()
-
 	sort.Slice(r.items, func(i, j int) bool {
-		return r.items[i].FatRate < r.items[j].FatRate //这时排序？
+		return r.items[i].FatRate < r.items[j].FatRate
 	})
 	frs := map[float64]struct{}{}
 	for _, item := range r.items {
@@ -127,11 +126,10 @@ func (r *FatRateRank) getRank(name string) (rank int, sex string, fatRate float6
 }
 
 func (r *FatRateRank) getRankTop() []*apiss.PersonalRank {
-	r.itemsLock.Lock() // 加锁
+	r.itemsLock.Lock()
 	defer r.itemsLock.Unlock()
-
 	sort.Slice(r.items, func(i, j int) bool {
-		return r.items[i].FatRate < r.items[j].FatRate //这时排序？
+		return r.items[i].FatRate < r.items[j].FatRate
 	})
 	out := make([]*apiss.PersonalRank, 0, 10)
 	for i := 0; i < 10 && i < len(r.items); i++ {

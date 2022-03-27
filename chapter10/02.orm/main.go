@@ -29,10 +29,10 @@ func main() {
 	//全覆盖更新
 	//undateExistingPerson(conn)
 	// 更新几个值
-	//	undateExistingPersonSelectFields(conn)
+	undateExistingPersonSelectFields(conn)
 
 	//删除
-	deletePerson(conn)
+	//deletePerson(conn)
 
 }
 func connectDb() *gorm.DB { //连接数据库 返回一个数据库
@@ -123,7 +123,7 @@ func undateExistingPerson(conn *gorm.DB) error {
 // 只更新某个字段
 func undateExistingPersonSelectFields(conn *gorm.DB) error {
 	p := &types.PersonalInformation{
-		ID:   6,
+		ID:   7,
 		Name: "xiao",
 		Sex:  "男",
 		Tall: 2.0, // 结构体中的数据是可以 缺的。

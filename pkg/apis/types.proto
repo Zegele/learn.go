@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package apis;
 
-option go_package = "../apiss";
+option go_package = "../apis";
 
 message PersonalInfomationList{
   repeated PersonalInfomation items = 1;//重复 这就是切片类型？
