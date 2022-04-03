@@ -70,8 +70,8 @@ func queryAllData(err error, learnDB *sql.DB) {
 }
 
 func queryAllDataHack(err error, learnDB *sql.DB) {
-	_sql := fmt.Sprintf(`select name, sex from personal_information where name = '%s' and sex = '%s'`, "111' -- ", "女") //但是查询结果把数据泄露出来了。
-	//"111", "女" 本来是不存在该数据的。
+	_sql := fmt.Sprintf(`select name, sex from personal_information where name = '%s' and sex = '%s'`, "222' -- ", "女") //但是查询结果把数据泄露出来了。
+	//"222", "女" 本来是不存在该数据的。
 	rows, err := learnDB.Query(_sql) //sql语句就行
 	//rows, err := learnDB.Query("select * from personal_information")
 	if err != nil {

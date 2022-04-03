@@ -72,7 +72,7 @@ func ormSelectWithInaccurateQuery(conn *gorm.DB) {
 }
 func ormSelectWithInaccurateQueryHack(conn *gorm.DB) {
 	output := make([]*types.PersonalInformation, 0)
-	resp := conn.Where("name = ? and sex = ?", "111' -- ", "女").Find(&output) // 这个大于1.71 怎么查询结果包含1.71呢？
+	resp := conn.Where("name = ? and sex = ?", "222' -- ", "女").Find(&output) // 这个大于1.71 怎么查询结果包含1.71呢？
 	if resp.Error != nil {
 		fmt.Println("查找失败：", resp.Error)
 		return
@@ -86,7 +86,7 @@ func ormSelectWithInaccurateQueryHack(conn *gorm.DB) {
 func creatNewPerson(conn *gorm.DB) error {
 	resp := conn.Create(&types.PersonalInformation{ // 注意这里有返回错误，但是被隐藏了。一定要有东西接住，查看是否有错。
 		//有了types.Table函数，这里没有ID这项，也可以直接操作。和直接操作go的结构体是一样的。不需要sql语句了。
-		Name:   "111",
+		Name:   "222",
 		Sex:    "男",
 		Tall:   1.80,
 		Weight: 65.0,

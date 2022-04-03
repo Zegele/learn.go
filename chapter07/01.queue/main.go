@@ -37,7 +37,7 @@ func main() {
 	q.Push(5)
 	q.Push(nil)
 
-	fmt.Println(q.Pop()) //111 true
+	fmt.Println(q.Pop()) //222 true
 	fmt.Println(q.Pop()) //a true
 	fmt.Println(q.Pop()) //3 true
 	fmt.Println(q.Pop()) //4 true
