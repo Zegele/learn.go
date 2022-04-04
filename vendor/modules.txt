@@ -117,6 +117,7 @@ go.uber.org/zap/zapgrpc
 golang.org/x/crypto/sha3
 # golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d
 ## explicit; go 1.17
+golang.org/x/net/context
 golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack

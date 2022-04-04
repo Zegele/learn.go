@@ -9,6 +9,8 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/spf13/cobra v1.3.0
 	go.etcd.io/etcd/client/v3 v3.5.2
+	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d
+	google.golang.org/grpc v1.42.0
 	google.golang.org/protobuf v1.27.1
 	gorm.io/driver/mysql v1.3.2
 	gorm.io/gorm v1.23.1
@@ -40,11 +42,9 @@ require (
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.17.0 // indirect
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
 	golang.org/x/sys v0.0.0-20211205182925-97ca703d548d // indirect
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/genproto v0.0.0-20211208223120-3a66f561d7aa // indirect
-	google.golang.org/grpc v1.42.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 

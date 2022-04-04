@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package apis;
+
+// unable to determine Go import path for "types.proto"
+// 出现上述错误，找不到路径，加入下面一行命令，再运行 protoc --go_out=. --plugin= types.proto ，则生成了types.pb.go文件。
+option go_package = "../apis";
+
+service RankService{
+  rpc Register(PersonalInformation) returns(PersonalInformation){}
+}
+
+message PersonalInformationList{
+    repeated PersonalInformation items = 1;
+}
+
+message PersonalInformation{
+  // @gotags: gorm:"primaryKey; column:id" //注意这个一定要写 不要忘了Key
+  int64 id = 1;
+  // @gotags: gorm:"column:name" // 这个要手写么？ 反正必须要有 protoc-go-inject-tag -input="*.pb.go"就需要读取这个tag
+  string name = 2;
+  // @gotags: gorm:"column:sex"
+  string sex = 3;
+  // @gotags: gorm:"column:tall"
+  float tall = 4;
+  // @gotags: gorm:"column:weight"
+  float weight = 5;
+  // @gotags: gorm:"column:age"
+  int64 age = 6;
+}
