@@ -32,7 +32,7 @@ message PersonalRank{
 
 message PersonalInformationFatRate{
   string name = 1;
-  float farRate= 2; //这里小写，grpc里也会大写的。（大写应该是方便JSON的使用要求）
+  float fatRate= 2; //这里小写，grpc里也会大写的。（大写应该是方便JSON的使用要求）
 }
 
 

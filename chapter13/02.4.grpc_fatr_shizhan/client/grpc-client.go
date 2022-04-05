@@ -16,18 +16,38 @@ func main() {
 		log.Fatalf("did not connect: %v", err)
 	}
 	c := apis.NewRankServiceClient(conn)
-	ret, err := c.Register(context.TODO(), &apis.PersonalInformation{Name: "Tom"})
+	ret, err := c.Register(context.TODO(), &apis.PersonalInformation{
+		Name:   "Tom",
+		Sex:    "男",
+		Tall:   1.8,
+		Weight: 75.0,
+		Age:    30,
+	})
 	if err != nil {
 		log.Fatal("注册失败：", err)
 	}
 	log.Println("注册成功", ret)
+
+	{ // 榜单
+		top, err := c.GetTop(context.TODO(), &apis.Null{})
+		if err != nil {
+			log.Fatal("获取榜单失败：", err)
+		}
+		log.Println("榜单：", top.String())
+	}
 
 	log.Println("开始批量注册")
 	regCli, err := c.RegisterPersons(context.TODO())
 	if err != nil {
 		log.Fatal("获取批量注册客户端失败：", err)
 	}
-	if err := regCli.Send(&apis.PersonalInformation{Name: fmt.Sprintf("tom-%d", time.Now().Nanosecond())}); err != nil {
+	if err := regCli.Send(&apis.PersonalInformation{
+		Name:   fmt.Sprintf("tom-%d", time.Now().Nanosecond()),
+		Sex:    "男",
+		Tall:   1.8,
+		Weight: 71,
+		Age:    28,
+	}); err != nil {
 		log.Fatal("注册时失败：", err)
 	}
 	if err := regCli.Send(&apis.PersonalInformation{Name: fmt.Sprintf("tom-%d", time.Now().Nanosecond())}); err != nil {
@@ -45,4 +65,12 @@ func main() {
 		log.Fatal("无法接收结果：", err)
 	}
 	log.Println("批量注册结果：", resp.String())
+
+	{ // 榜单
+		top, err := c.GetTop(context.TODO(), &apis.Null{})
+		if err != nil {
+			log.Fatal("获取榜单失败：", err)
+		}
+		log.Println("榜单：", top.String())
+	}
 }

@@ -1,18 +1,18 @@
 package frinterface
 
 import (
-	"learn.go/chapter12/apiss"
+	"learn.go/chapter13/02.4.grpc_fatr_shizhan/apis"
 )
 
 type ServeInterface interface {
 	//嫁接要求
-	RegisterPersonalInformation(pi *apiss.PersonalInformation) error
+	RegisterPersonalInformation(pi *apis.PersonalInformation) error
 
-	UpdatePersonalInformation(pi *apiss.PersonalInformation) (*apiss.PersonalInformationFatRate, error)
+	UpdatePersonalInformation(pi *apis.PersonalInformation) (*apis.PersonalInformationFatRate, error)
 
-	GetFatRate(name string) (*apiss.PersonalRank, error)
+	GetFatRate(name string) (*apis.PersonalRank, error)
 
-	GetTop() ([]*apiss.PersonalRank, error)
+	GetTop() ([]*apis.PersonalRank, error)
 }
 
 type RankInitInterface interface {

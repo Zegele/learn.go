@@ -4,6 +4,7 @@ import (
 	context2 "golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"learn.go/chapter13/02.4.grpc_fatr_shizhan/apis"
+	"learn.go/chapter13/02.4.grpc_fatr_shizhan/ranks"
 	"learn.go/chapter13/02.4.grpc_fatr_shizhan/server/rankserver"
 	"log"
 	"net"
@@ -23,8 +24,8 @@ func startGRPCServer(ctx context2.Context) {
 	}
 	s := grpc.NewServer([]grpc.ServerOption{}...)             // 这是啥？？？
 	apis.RegisterRankServiceServer(s, &rankserver.RankServer{ // RegisterRankServiceServer 注册这个接口  pb.go
-		Persons:  map[string]*apis.PersonalInformation{},
-		PersonCh: make(chan *apis.PersonalInformation),
+		RankS:    ranks.NewFatRateRank(),
+		PersonCh: make(chan *apis.PersonalInformation, 1024),
 	})
 	go func() {
 		select {
