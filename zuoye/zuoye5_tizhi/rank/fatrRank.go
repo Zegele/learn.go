@@ -77,7 +77,7 @@ func (fr *FR) ReadProtoFile(filePath string) (ps *apii.Persons) {
 	return ps
 }
 
-// 批量生成rankItem --> rank
+// 批量生成rankItem --> ranks
 func (fr *FR) MakeRank(ps *apii.Persons) (rs *apii.Rank) {
 	rs = &apii.Rank{}
 	for _, v := range ps.Items {

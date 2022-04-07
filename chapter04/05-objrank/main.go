@@ -74,7 +74,7 @@ func (r *FatRateRank) getRank(name string) (rank int, fatRate float64) {
 	//	_names:= fatRate2PersonMap[frItem]
 	//	for _, _name := range _names{
 	//		if _name == name{
-	//			rank = i +1
+	//			ranks = i +1
 	//			fatRate = frItem
 	//			return
 	//		}

@@ -48,7 +48,7 @@ func main() {
 	fr.PaiXuQuick(rs, 0, len(rs.ItemsS)-1) //快排
 
 	RankFileWritePathByJSON := "E:/Geek/src/learn.go/zuoye/zuoye5_tizhi/rankhuanhang.json"
-	RankFileWritePathByPROTOBUF := "E:/Geek/src/learn.go/zuoye/zuoye5_tizhi/rank.protobuf"
+	RankFileWritePathByPROTOBUF := "E:/Geek/src/learn.go/zuoye/zuoye5_tizhi/ranks.protobuf"
 	fr.WriteRank(RankFileWritePathByPROTOBUF, rs)
 	fr.WriteRankHuanHang(RankFileWritePathByJSON, rs)
 

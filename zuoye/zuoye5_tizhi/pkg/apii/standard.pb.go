@@ -161,7 +161,7 @@ type RankItem struct {
 
 	Name string  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Fatr float32 `protobuf:"fixed32,2,opt,name=fatr,proto3" json:"fatr,omitempty"`
-	Rank int64   `protobuf:"varint,3,opt,name=rank,proto3" json:"rank,omitempty"`
+	Rank int64   `protobuf:"varint,3,opt,name=ranks,proto3" json:"ranks,omitempty"`
 }
 
 func (x *RankItem) Reset() {

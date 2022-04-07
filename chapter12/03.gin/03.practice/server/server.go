@@ -27,9 +27,9 @@ func main() {
 	conn := connectDb()
 	var rankServer frinterface.ServeInterface = NewDbRank(conn, rank.NewFatRateRank()) //这个初始化一定要看懂。
 	// NewDbRank 的返回值已经是DbRank结构体，并实现了该接口。
-	// NewDbRank中的参数conn是连接数据库，rank.NewFatRate是返回一个实例化的结构体： &FatRateRank{items: make([]RankItem, 0, 100)}
+	// NewDbRank中的参数conn是连接数据库，ranks.NewFatRate是返回一个实例化的结构体： &FatRateRank{items: make([]RankItem, 0, 100)}
 
-	// var rankServer frinterface.ServeInterface = rank.NewFatRateRank()
+	// var rankServer frinterface.ServeInterface = ranks.NewFatRateRank()
 
 	if initRank, ok := rankServer.(frinterface.RankInitInterface); ok {
 		if err := initRank.Init(); err != nil {
@@ -76,7 +76,7 @@ func main() {
 		}
 	})
 
-	r.GET("/rank/:name", func(c *gin.Context) {
+	r.GET("/ranks/:name", func(c *gin.Context) {
 		name := c.Param("name") //http://localhost:8081/rank/111
 		if fr, err := rankServer.GetFatRate(name); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{

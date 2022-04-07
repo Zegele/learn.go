@@ -34,7 +34,7 @@ func main() {
 		fmt.Println(i, v)
 	}
 	//for i := 0; i < totalMember; i++ {
-	//	go all.MakeFatRAndRank("a" + fmt.Sprint(i)) //生成 fatr 和 rank
+	//	go all.MakeFatRAndRank("a" + fmt.Sprint(i)) //生成 fatr 和 ranks
 	//	//time.Sleep(1 * time.Millisecond)
 	//}
 

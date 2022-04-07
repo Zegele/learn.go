@@ -97,7 +97,7 @@ func main() {
 
 	}))
 
-	m.Handle("/rank", http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+	m.Handle("/ranks", http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		if !strings.EqualFold(request.Method, "get") { //strings.EqualFold 忽略大小写
 			// 如果不是post方法
 			writer.WriteHeader(http.StatusBadRequest) //400

@@ -1,4 +1,4 @@
-package rank
+package ranks
 
 import (
 	gobmi "github.com/armstrongli/go-bmi"

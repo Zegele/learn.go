@@ -12,8 +12,8 @@ func main() {
 		//是m.Handle 不是m.Handler
 		writer.Write([]byte(`hello`))
 	}))
-	m.Handle("/rank", http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		writer.Write([]byte(`rank`))
+	m.Handle("/ranks", http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
+		writer.Write([]byte(`ranks`))
 	}))
 	m.Handle("/history/xiao", http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		writer.Write([]byte(`xiao的历史`))
