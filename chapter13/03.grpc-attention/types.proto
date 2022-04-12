@@ -53,4 +53,12 @@ message PersonalInformation{
   float weight = 5;
   // @gotags: gorm:"column:age"
   int64 age = 6;
+  string nation = 7; //可以增加，但不能删除。之前的不用也空着，不能删除
+  //string extra = 8; // 这样可以扩展
+  repeated ExtraInfo extras = 8;
+}
+
+message ExtraInfo{// 用于扩展 用于妥协，因为proto没法直接用map等类型，类似这样的使用方法，间接实现proto的map类型。
+  string key = 1;
+  string value = 2;
 }

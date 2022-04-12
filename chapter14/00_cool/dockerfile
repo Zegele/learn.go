@@ -1,0 +1,47 @@
+from golang:1.17.2-alpine3.13 as build
+## as 表示 该from下的所有编译都是临时的？
+copy main.go /tmp/
+## 把main.go 文件 复制到tmp文件夹下
+
+env GOARCH=amd64
+env GOOS=linux
+env CGO_ENABLED=0
+##CGO_ENABLED=0表示不依赖C C++，只要golang自己的
+## 设置环境变量 让编译成linux的
+
+run echo "build file server"
+## 打印？
+
+workdir /tmp
+## 先进到这个文件夹下
+
+run go build ./main.go
+#编译tmp文件夹下的 main.go文件，编译后有个mian文件。
+## run go build -o /tmp/main ./main.go 老师是使用这个
+## 编译到tmp/main这个指定路径下
+
+run mv main /usr/local/bin/
+## 把编译好的main文件，放在/usr/local/bin/下
+
+##from ubuntu:20.04
+## ubuntu 编译出的环境就很小
+from alpine:3.13
+## alpine编译出的更小
+
+copy --from=build /usr/local/bin/main /usr/local/bin
+## 表示从上面的build好的文件，复制到我这里。从/usr/local/bin/main复制到/usr/local/bin
+
+cmd main
+
+##----------------------------------
+##from ubuntu:20.04
+##run echo "hello server"
+##run apt-get update && apt-get install -yy wget
+##copy main /usr/local/bin/
+##cmd main
+## copy main /usr/local/bin 是ubuntu环境下的变量？
+## 启动时，cmd会去运行main文件
+## docker build -t lfs:1.0 .
+## docker build progress plain -t lfs:1.0 . //这个会显示更多
+
+## docker 高阶就是多步骤，多步骤就是有多个from

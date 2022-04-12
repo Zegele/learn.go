@@ -17,13 +17,13 @@ type RankServer struct {
 	PersonCh   chan *apis.PersonalInformation
 }
 
+func (r *RankServer) GetFatRate(ctx context.Context, information *apis.PersonalInformation) (*apis.PersonalRank, error) {
+	return r.RankS.GetFatRate(information.Name)
+}
+
 func (r *RankServer) Update(ctx context.Context, information *apis.PersonalInformation) (*apis.PersonalInformationFatRate, error) {
 	r.regPerson(information)
 	return r.RankS.UpdatePersonalInformation(information)
-}
-
-func (r *RankServer) GetFatRate(ctx context.Context, information *apis.PersonalInformation) (*apis.PersonalRank, error) {
-	return r.RankS.GetFatRate(information.Name)
 }
 
 func (r *RankServer) GetTop(ctx context.Context, null *apis.Null) (*apis.PersonalRanks, error) {
