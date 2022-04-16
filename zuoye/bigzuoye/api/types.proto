@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package api;
+
+option go_package = "../api";
+
+message PersonalInformation{
+  // @gotags: gorm:"primaryKey; column:id"
+  int64 id =1;
+  // @gotags: gorm:"column:name"
+  string name = 2; //昵称
+  // @gotags: gorm:"column:password"
+  int64 password = 3;
+  // @gotags: gorm:"column:account"
+  int64 account = 4;
+  // @gotags: gorm:"column:onlinevisiable"
+  bool onlinevisiable = 5;
+}
+
+
+service Client_Service{
+  //注册
+  rpc Register (PersonalInformation) returns (PersonalInformation){}
+// 更新等其他函数
+}
