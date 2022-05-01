@@ -1,5 +1,6 @@
 package main
 
+// 客户端单词请求，服务端单次答复。单去单回
 import (
 	context2 "golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -23,6 +24,7 @@ func startGRPCServer(ctx context2.Context) {
 	}
 	s := grpc.NewServer([]grpc.ServerOption{}...)             // 这是啥？？？
 	apis.RegisterRankServiceServer(s, &rankserver.RankServer{ // RegisterRankServiceServer 注册这个接口  pb.go
+		// 不需要考虑url，关注函数的参数和返回值，参数和返回值都被定义在payload中。
 		Persons: map[string]*apis.PersonalInformation{},
 	})
 	go func() {

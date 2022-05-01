@@ -16,7 +16,7 @@ func main() {
 	var rankServer frinterface.ServeInterface = rank.NewFatRateRank()
 	//定义了一个接口，实现了FatRateRank 结构体，并将该结构体已经实例化
 
-	r := gin.Default() // 这是在干什么？
+	r := gin.Default() // 这是在干什么？ 感觉就是类似声明要使用gin了。
 	pprof.Register(r)  //pprof可以查看内存，goroutine是否有泄露等。方便改进代码。
 
 	r.GET("/", func(c *gin.Context) {

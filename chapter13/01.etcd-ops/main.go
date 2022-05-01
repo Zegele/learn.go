@@ -38,7 +38,7 @@ func etcdWatchAndReactDemo() {
 	go func() {
 		watcher := cli.Watch(context.TODO(), "a") //etcd 的watch
 		for respData := range watcher {
-			evs := respData.Events //evt是事件   事件驱动 模型驱动
+			evs := respData.Events //evt是事件（批量的）   事件驱动 模型驱动
 			whetherBreak := false  //结束双层循环
 			for _, ev := range evs {
 				i, err := strconv.Atoi(string(ev.Kv.Value))

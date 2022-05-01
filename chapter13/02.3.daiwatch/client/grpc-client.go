@@ -30,12 +30,18 @@ func main() {
 	if err := regCli.Send(&apis.PersonalInformation{Name: fmt.Sprintf("tom-%d", time.Now().Nanosecond())}); err != nil {
 		log.Fatal("注册时失败：", err)
 	}
+	time.Sleep(1 * time.Second)
+
 	if err := regCli.Send(&apis.PersonalInformation{Name: fmt.Sprintf("tom-%d", time.Now().Nanosecond())}); err != nil {
 		log.Fatal("注册时失败：", err)
 	}
+	time.Sleep(1 * time.Second)
+
 	if err := regCli.Send(&apis.PersonalInformation{Name: fmt.Sprintf("tom-%d", time.Now().Nanosecond())}); err != nil {
 		log.Fatal("注册时失败：", err)
 	}
+	time.Sleep(1 * time.Second)
+
 	if err := regCli.Send(&apis.PersonalInformation{Name: fmt.Sprintf("tom-%d", time.Now().Nanosecond())}); err != nil {
 		log.Fatal("注册时失败：", err)
 	}

@@ -1,5 +1,7 @@
 package main
 
+//对服务端单次请求，客户端（watch也算客户端）多次接收，完成“监听”功能
+// watch和服务端代码有改动，client代码没有改动。
 import (
 	"context"
 	"google.golang.org/grpc"
@@ -15,10 +17,12 @@ func main() {
 		log.Fatalf("did not connect: %v", err)
 	}
 	c := apis.NewRankServiceClient(conn)
-	w, err := c.WatchPersons(context.TODO(), &apis.Null{})
+	w, err := c.WatchPersons(context.TODO(), &apis.Null{}) //先建立一个watcher
+
 	if err != nil {
 		log.Fatal("启动watcher失败：", err)
 	}
+	// 生成的w是个接口， 里面有 Recv 方法，该方法是在接收内容
 	for {
 		pi, err := w.Recv() //接收 ， 在for循环里不停接收
 		if err != nil {

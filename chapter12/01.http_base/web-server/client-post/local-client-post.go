@@ -9,9 +9,9 @@ import (
 )
 
 func main() {
-	//r := strings.NewReader("foooooooo")                       //strings包要看看
-	r := strings.NewReader("http://localhost:8088/?name=xiao&&sex=男,aglajhf") //这样就可以传如任何数据
-	resp, err := http.Post("http://localhost:8088", "*/*", r)                 //contentType种类很多。 */*表示不管是什么都接受。
+	r := strings.NewReader("foooooooo") //strings包要看看
+	//r := strings.NewReader("http://localhost:8088/?name=xiao&&sex=男,aglajhf") //这样就可以传如任何数据
+	resp, err := http.Post("http://localhost:8088", "*/*", r) //contentType种类很多。 */*表示不管是什么都接受。
 	if err != nil {
 		log.Fatal(err)
 	}

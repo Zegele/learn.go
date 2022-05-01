@@ -18,20 +18,21 @@ func main() {
 	m := http.NewServeMux()
 
 	m.Handle("/register", http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
-		if !strings.EqualFold(request.Method, "post") { //strings.EqualFold 忽略大小写
-			// 如果不是post方法
-			writer.WriteHeader(http.StatusBadRequest) //400
+		if !strings.EqualFold(request.Method, "post") { //strings.EqualFold 忽略大小写，且对这两个参数进行相等
+			//if request.Method != "post" // request.Method  是对request进行什么方法的操作？
+			// 如果request.Method不是post方法
+			writer.WriteHeader(http.StatusBadRequest) //400 4开头客户端出问题
 			return
 		}
 
 		if request.Body == nil {
-			//如果Body是空的
+			//如果Body是空的， 不能注册了，但没有内容。Body就是payload
 			writer.WriteHeader(http.StatusBadRequest)
 			return
 		}
 		defer request.Body.Close()
 
-		payload, err := ioutil.ReadAll(request.Body) // 读取body
+		payload, err := ioutil.ReadAll(request.Body) // 如果有body，读取body，到payload
 		if err != nil {
 			writer.WriteHeader(http.StatusBadRequest)
 			writer.Write([]byte(fmt.Sprintf("无法读取数据： %s", err)))
@@ -46,7 +47,7 @@ func main() {
 		}
 
 		if err := rankServer.RegisterPersonalInformation(pi); err != nil {
-			writer.WriteHeader(http.StatusInternalServerError) //如果还是nil，就说明是客户端出错。
+			writer.WriteHeader(http.StatusInternalServerError) //如果还是nil，就说明是服务端出错。
 			writer.Write([]byte(fmt.Sprintf("注册失败： %s", err)))
 			return
 		}
@@ -104,7 +105,7 @@ func main() {
 			return
 		}
 
-		name := request.URL.Query().Get("name")
+		name := request.URL.Query().Get("name") // localhost:8080/ranks?name=xiaoqiang
 		if name == "" {
 			writer.WriteHeader(http.StatusBadRequest)
 			writer.Write([]byte("name参数未设置"))

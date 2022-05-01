@@ -64,7 +64,7 @@ func (d *dbRank) Init() error {
 }
 
 func (d dbRank) RegisterPersonalInformation(pi *apiss.PersonalInformation) error {
-	resp := d.conn.Create(pi)
+	resp := d.conn.Create(pi) //DB.Create() 就是数据库创建
 	//(&PersonalInformation{
 	//	Tall:   1.80,
 	//	Name:   "xiao",

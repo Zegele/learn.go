@@ -1,10 +1,12 @@
 package main
 
+// 实现客户端多次发送请求，服务端一次答复
+// 客户端有一个stream client 不停地发送数据， 并告知“说完了”，然后接收消息
 import (
 	context2 "golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"learn.go/chapter13/02.2.danquduohui/apis"
-	"learn.go/chapter13/02.2.danquduohui/server/rankserver"
+	"learn.go/chapter13/02.2.duoqudanhui/apis"
+	"learn.go/chapter13/02.2.duoqudanhui/server/rankserver"
 	"log"
 	"net"
 )

@@ -3,7 +3,7 @@ package rankserver
 import (
 	"context"
 	"io"
-	"learn.go/chapter13/02.2.danquduohui/apis"
+	"learn.go/chapter13/02.2.duoqudanhui/apis"
 	"log"
 	"sync"
 )
@@ -18,7 +18,7 @@ type RankServer struct {
 func (r *RankServer) RegisterPersons(server apis.RankService_RegisterPersonsServer) error {
 	pis := &apis.PersonalInformationList{}
 	for {
-		pi, err := server.Recv() // 客户端发送很多，服务端要不停接收。直到发完了，给我一个答复
+		pi, err := server.Recv() //因为是接收很多，所以要receive一个list（接收很多人的信息）// 客户端发送很多，服务端要不停接收。直到发完了，给我一个答复
 		if err == io.EOF {       //这里的io.EOF 表示消息已经发完了，正常结束
 			break
 		}
@@ -35,7 +35,7 @@ func (r *RankServer) RegisterPersons(server apis.RankService_RegisterPersonsServ
 
 	log.Println("得到连续注册清单：", pis.String())
 	//接收完消息，发送，并且关闭
-	return server.SendAndClose(pis) //
+	return server.SendAndClose(pis) //接收到客户端消息，发送出去，然后服务端结束。
 }
 
 func (r *RankServer) Register(ctx context.Context, information *apis.PersonalInformation) (*apis.PersonalInformation, error) {

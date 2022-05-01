@@ -17,7 +17,7 @@ type RankServer struct {
 }
 
 //单管道案例
-func (r *RankServer) regPerson(pi *apis.PersonalInformation) {
+func (r *RankServer) regPerson(pi *apis.PersonalInformation) { // 把client注册的信息，放入channel，为发给watch做准备。
 	r.Lock()
 	defer r.Unlock()
 	r.Persons[pi.Name] = pi
@@ -26,7 +26,7 @@ func (r *RankServer) regPerson(pi *apis.PersonalInformation) {
 
 func (r *RankServer) WatchPersons(null *apis.Null, server apis.RankService_WatchPersonsServer) error {
 	for pi := range r.PersonCh {
-		if err := server.Send(pi); err != nil {
+		if err := server.Send(pi); err != nil { //把channel中的数据，send给watcher 。
 			log.Println("发送失败，结束：", err)
 			return err
 		}

@@ -12,11 +12,12 @@ service RankService{
   rpc Update(PersonalInformation) returns(PersonalInformationFatRate){}
   rpc GetFatRate(PersonalInformation) returns(PersonalRank){}
   rpc GetTop(null)returns(PersonalRanks){}
+  // 返回的PersonalRanks是个切片。
 
   rpc RegisterPersons(stream PersonalInformation) returns (PersonalInformationList){}
   rpc WatchPersons(null)returns(stream PersonalInformation){} // 参数不能空 watch 谁  //这里是watch所有人
 }
-
+//完成了所有的排行榜grpc排行榜定义
 message null{}
 
 message PersonalRanks{
