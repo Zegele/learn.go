@@ -1,2 +1,15 @@
 from ubuntu:20.04
 run echo "hello"
+
+#// 通常在dockerfile的文件夹下，运行docker build
+#// docker build --help //可以查看命令
+#// 目前关注下 -t
+#  -t, --tag list                Name and optionally a tag in the
+#                                 'name:tag' format
+#       --target string           Set the target build stage to build.
+#       --ulimit ulimit           Ulimit options (default [])
+
+# docker build -t hello:docker .
+#              hello 表示把这个ubuntu系统起了个名字叫hello； tag（标签）是docker；   . 表示在该目录（路径）
+# docker build --progress plain -t hello:docker .
+#docker run -it hello:docker bash //启动了hello这个容器中的bash

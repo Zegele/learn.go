@@ -21,7 +21,7 @@ func main() {
 	//局限性是，传入的参数都是string类型的。
 
 	cmd := &cobra.Command{
-		Use:   "healthcheck",
+		Use:   "healthcheck", // 用这个命令的名字
 		Short: "体脂计算器，根据身高、体重、性别、年龄计算体脂比，并给出健康建议",
 		Long:  "该体脂计算器是基于BMI的体脂计算器，等详细描述。。。",
 		Run: func(cmd *cobra.Command, args []string) {
@@ -39,18 +39,20 @@ func main() {
 			fmt.Println(learn_go_tools.Max(3, 5))
 		},
 	}
-	cmd.Flags().StringVar(&name, "name", "", "姓名")
+	cmd.Flags().StringVar(&name, "name", "", "姓名") // 绿色name是参数名，value的引号内是默认值，usage是注释
 	cmd.Flags().StringVar(&sex, "sex", "", "性别")
 	cmd.Flags().Float64Var(&tall, "tall", 0, "身高")
 	cmd.Flags().Float64Var(&weight, "weight", 0, "体重")
 	cmd.Flags().IntVar(&age, "age", 0, "年龄")
 
-	cmd.Execute()
+	cmd.Execute() // 上面写好后，该行代码表示执行。
 	//计算
 
 	//评估结果
 
 	// terminal
 	//第7课时间50：08
+	// go run ./main.go --help  // 可以看到可用的命令
+	// go run ./main.go --age 30 --name xiaoqiang --weight 65 // 则可以执行相应的命令
 
 }

@@ -146,7 +146,7 @@ func (s *fatRateSuggestion) getIndexOfAge(age int) int {
 		return 1
 	case age > 60:
 		return 2
-	default:
+	default.conf:
 		return -1
 	}
 }
