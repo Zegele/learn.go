@@ -55,3 +55,5 @@ replace learn.go.tools => ../learn.go.tools //自己写在这里的。但是vend
 replace learn.go/zuoye/bfr_rely_on/bmi => ./github.com/!zegele/learn.go@v0.0.0-20211220135454-4870e4b74f1a/zuoye/bfr_rely_on/bmi
 
 replace github.com/armstrongli/go-bmi => ./staging/src/github.com/armstrongli/go-bmi
+
+replace github.com/docker/docker@v20.10.16+incompatible => ./github.com/docker/docker
