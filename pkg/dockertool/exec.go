@@ -3,6 +3,7 @@ package dockertool
 import (
 	"bytes"
 	"context"
+	_ "github.com/docker/docker/api/types"
 	_ "github.com/docker/docker/client"
 	_ "github.com/docker/docker/pkg/stdcopy"
 )
