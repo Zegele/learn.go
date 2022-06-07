@@ -1,0 +1,102 @@
+ 19：00 出问题了
+19：20 复习上节课，重要。
+type downloadFromNetDisk struct{
+secret 	DynamicSecret //这是个接口
+filePath 	string
+}
+实例化：
+dd := &downloadFromNetDisk{
+secret : &mobileTokenDynamic{mobileNumber:"1234656"} , //这个mobile。。结构体，是实现了DynamicSecret这个接口的结构体。记住：实现接口要落到实处。
+}
+
+动态的，要想办法用到接口。
+
+19：40 复习接口特性
+
+19：48 第9个特性 空接口 interface{}
+
+
+19：53
+类型转换
+Golang没有严格的impl关键字来绑定实现关系，只要拥有对应接口的所有的函数类型（又称函数签名），即可在类型之间进行转换。
+var regrigerator Refrigerator // 结构体
+var op Open // Open 接口
+var cl Close // Close 接口
+op = refrigerator // 成功转换 让冰箱实现了Open接口
+cl = refrigerator // 成功转换 让冰箱实现了Close接口
+
+类型断言
+从特殊到一般可以无缝切换，但从一般到特殊无法直接转换，需要做类型判断，即类型断言。
+r := Refrigerator{Size:"very big"}
+var b Box = r //r是结构体，Box是接口
+var c Close = b // Close是接口 // 等于b是什么？？？把Box接口转成Close接口？
+r2 := c.(Refrigerator) // c.(Refrigerator)是什么东西？？？老师说是强转，要琢磨下。
+fmt.Println(r2.Size)
+
+
+switch 断言
+switch xxx.(type) case
+
+ok断言
+value, ok := i.(<type>)
+1. 如果断言成功，value的值为i的值；如果失败，则为默认值。
+2. 如果断言成功，ok的值为true，否则为false
+3. i为需要断言的类型(我感觉i为需要断言的东西)
+4.  .(<type>)为断言格式。 <type>为尝试断言的类型。
+i := "string 44"
+str1, ok := i.(string) // 对i进行string类型断言，看i是不是string类型。
+
+
+func checkIsRefrigerator (c Close)(Refrigerator, bool){//参数是Close接口
+ r, ok := c.(Refrigerator)//意思是Refrigerator类型是不是适用于c这个接口。如果适用ok返回true。因为c接口已经对接了一个类型，通过断言判断Refrigerator是不是和已经对接的类型是一样的类型。
+ return r, ok
+} 
+
+func legendary(legend PutElephantIntoRefrigeratoe, r Refrigerator, e Elephant){//该函数的参数中，legend是接口，r，e是结构体
+...
+}
+调用这个legendary函数，直接可以实现完整的调用接口。
+
+20：27 对象or指针
+方法可以在对象上，也可以在对象指针上。在使用时，调用、功能有略微差别：
+1. 定义在对象上的方法无法修改对象属性；定义在对象指针上的可以。
+2. 对象上实现了接口的所有函数，才可以转为对应的接口对象；如果某些函数是在对象指针上，某些函数实在对象上，则只能用对象指针作为接口对象。
+
+
+
+20：28 有个test的演示
+下c
+
+20：35
+
+20：45 接口技巧（案例）
+接口的变更，不会带来编译失败，从而导致程序出现异常。（接口变量了，但程序没有适配，就出现异常。）
+
+20：54 仔细看
+
+21:05 强制实现接口（放在type结构体的地方）
+ var _ Door = &GlassDoor{} 让玻璃门强制实现Door接口，如果，否则报错。
+
+21：14 多态
+多态是同一个行为具有多个不同表现形式或形态的能力。
+
+继承和多态
+继承： is A 关注重复用，维护
+多态： like A 关注设计规范
+多态是你有这个能力，就可以这样用。
+像一个标准，遵循这个标准就可以用。
+
+21：20 面向接口编程
+框架
+面向接口编程是指在开发应用时，将执行细节与执行框架进行剥离，重点关注在定义模块、组件之间的交互，协作之上的接口定义与开发。
+
+21：36 实例
+
++表示这是一个功能
+. 点表示这是一个成员（如：结构体，接口等）
+
+
+无限循环中止：ctrl+c
+
+
+疑问：在阅读代码时，怎么分辨这个是接口还是结构体？？？

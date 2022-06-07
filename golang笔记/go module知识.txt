@@ -1,0 +1,11 @@
+1. set GO111MODULE = on //(这是打开了什么？) goland上本身就是on状态？
+2. SET GOPROXY = https://goproxy.cn （设置代理）
+SET GOPROXY = https://mirrors.aliyun.com/goproxy（阿里的）
+3. go mod init
+4. go get 库 （下载库）
+5. 如何下其他版本？
+   命令：go mod verify 用于验证该版本是否存在
+all modules verified 表示存在
+    
+go mod download 下载这个存在的版本
+然后就能使用指定这个版本的库了。

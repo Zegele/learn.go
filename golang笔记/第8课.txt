@@ -1,0 +1,108 @@
+第八课
+19：28replace
+1. fork 修改后push回去，再replace
+2. github上不做更改直接replace
+2.1 在自己的github上做个分支，GitHub replace
+2.2 一般用个staging目录 
+staging一般是项目不许用github上的库，所以先下载下来，统一放在staging里，然后引用staging中的库，这样效果和github一样，且不受网络等影响。效果是与直接引用github库一样的。
+
+
+replace 的意思是
+例如：
+replace(
+a => b //如果发现有引用a，那就替换成使用b
+)
+
+版本号可以写v 0.0.几， 也可以写 master，例如：
+github.com/a/b  master
+
+type aaa struct aaa就是对象
+type bbb int bbb也是对象，使用了type的就是对象
+
+
+
+演示 1小时16分要看
+
+会看下回调函数（第六课？）
+函数中有函数，如录入数据，同时对数据进行判断是否合法。都用函数。
+
+
+钉钉群关于命名的？：
+https://unbug.github.io/codelf/
+
+
+20：27 profiling 资源占用
+
+
+20：30异常处理内容
+20：38 常见错误
+
+20：45 
+
+debug.PrintStack() 打印调用栈
+
+20：52 err是什么内容？（回看panic 和err的处理，recover错误 ，没有理解 ）
+defer func(){
+	r := recover()
+	if r != nil{
+		//检测、处理异常信息
+	}
+}()
+
+20：57抓住错误
+recover的作用
+
+如何写出健壮的代码？
+在编写代码时，任何担心出现的问题必定会出现（墨菲定律）。
+为了提高编写代码的质量，需要精确控制每段代码的行为，并且做好足够的安全性保障。
+控制定义域
+空指针检测
+使用for range遍历
+谨慎使用共享变量
+控制并抓住异常
+
+
+
+21：03 泛型后续会讲
+
+21：06 debug 单步调试
+debug是在main函数中操作的。
+goland 点debug，进入debug模式。
+
+断点：运行到这里停下来。
+
+goland上，在行的左侧，鼠标左击，出现红点，添加断点。
+左下角有个bookmarks，点开，再展开breakpoints，会看到所有的断点。
+绿色箭头+小方块：重启
+红色方块：终止
+绿色竖条+绿色三角：继续运行直到下个断点。
+蓝色跳跃箭头+横线：跳到下一行
+蓝色向下箭头+横线：进入方法里
+蓝色向上箭头+横线：跳出方法
+蓝色斜向箭头：回到运行的行（没有理解，需要亲测）
+
+有调用栈界面，变量界面
+调用栈是从下往上调用
+ 
+21：38 单元测试
+黑盒测试：
+
+白盒测试：
+
+21：45 test实例
+1. _test.go 结尾的文件
+2. func TestXxxx(t *testing.T){...}
+3. 对于失败的case，需要调用t.Fail()、t.FailNow() 、..
+4. 运行测试代码（简称UT？）
+	go test 路径到文件
+	go test 路径到包
+
+或者goland中，_test.go文件中，对test的函数点击绿色三角（run那个三角）
+或者goland中，_test.go文件中，鼠标右键，弹出run，选择go test 。。。
+5. debug 单元测试
+
+测试案例：github.com/kubernetes/kubernetes/blob/master/pkg/controller
+github.com/kubernetes/kubernetes/blob/master/pkg/controller/replicaset/replica_set_test.go
+
+
+下节课 tdd

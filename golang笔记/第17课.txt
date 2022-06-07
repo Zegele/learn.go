@@ -1,0 +1,48 @@
+19：00 复习
+rust和go哪个好？
+webrender就是基于rust的
+评价rust略微优于go
+也适用硬件编程，go无法做到
+
+单线程没必要用channel
+
+改变select的概率：
+select{
+case 1:
+case 2:
+default: select{
+	case 3: 
+	}
+}
+
+正式开始：
+19：15 context（管控goroutine）
+1. 什么是context？
+context包
+context 是 golang 特有的用来管控多线程上下文、生命周期的设计。
+
+1.1 goroutine 有持久性的特性，需要信号量才可以停止。
+1.2 应用程序是逻辑控制的，逻辑结束时需要结束逻辑下生成的、需要结束的goroutine。
+
+context 可以方便地将信号传递给goroutine， 并且 context在cancel（取消）时，所有的context都会收到cancel的信号。
+
+2. context核心方法与功能
+准备context
+context.TODO()
+context.Background()
+
+2.1 WithCancel 
+WithCancel获得一个可以cancel的Context(A)，在取消时，生成的Context（B）以及关注B Context 的 goroutine 同样会取消。
+
+2.2 WithTimeout
+WithTimeout获得一个可以带定时器的Context，到时间后自动cancel。（倒计时）
+
+
+2.3 WithValue
+WithValue 获得一个带有key/value的context，本context以及后续任意生成的context都可以获得该key、value。
+
+
+2.4 WithDeadline
+WithDeadline 获得一个带有截止时间的Context。
+到截止时间时，Context会自动取消。
+后续生成的同样自动取消。

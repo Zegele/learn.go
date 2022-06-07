@@ -1,0 +1,42 @@
+20：20左右 with coverage
+
+书 head first 设计模式
+
+20:23 TDD 测试驱动开发
+TDD circle of life ：test fails (UT测试案例) -- test passes -- refactor
+
+20:38 推荐书：Learning Test-Driven Development
+ A Polyglot Guide to 
+
+what is Test-Driven Dev
+
+20：40test fail阶段
+
+
+20：46 快速生成测试代码
+general--
+
+49 failfase 有重大错误不需要继续运行
+fail() 失败，继续向下执行
+fatal(”信息“)失败直接退出
+
+20：52花括号
+
+重构 - 重命名 快捷键
+
+20：58 window edit split 分屏
+
+21：02 test passes阶段
+
+21：08 sort包 排序
+
+21：29 TDD的意义
+不定长参数，其实是传进来一个数组或切片，到底是哪个？
+
+
+21:33外部包测试
+go test -count=10000 . "测试10000次"
+
+fakeunion.SendMessage //假装发送
+
+main函数不能被test

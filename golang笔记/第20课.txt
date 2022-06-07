@@ -1,0 +1,10 @@
+close也可以在for range中close
+
+20：34 回顾链表
+
+20：50 算法
+
+https://visualgo.net/zh
+一个数据结构可视化的网站
+
+21：33 手写快速排序

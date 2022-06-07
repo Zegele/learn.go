@@ -1,0 +1,93 @@
+20：00 复习
+
+16课
+20：15 channel
+
+20：19 什么是channel
+channel是用来连接并发的goroutine的。
+一个goroutine通过channel向另一个goroutine发送消息，对应的goroutine通过channel来接收消息。
+
+20：21 如何定义channel
+Channel是golang的基本数据类型之一，于int, string, map 同等地位。 Channel于map一样，是引用类型。
+var <变量名称> chan <数据类型>
+例如：
+var intChan chan int
+var strChan chan string
+var strChan chan *string
+var objChan chan struct{}
+
+20:30 如何实例化channel
+channel是引用类型， 需要用make方法来实例化
+make(chan<数据类型>[,<size>])
+
+注意：
+当size不为0时，表示该channel是一个有长度的channel，又称为带缓冲（buffer）的channel。
+例如：
+make(chan int)
+make(chan int, 3)
+make(chan *string)
+make(chan *map[string]struct{})
+
+20：37  channel 特性
+1. channel本质是一个队列
+2. channel本身是线程安全的
+3. channel是数据类型敏感的
+
+20：41 channel操作
+操作1：
+1.1：添加数据：
+<channel 变量名称>  <-  <数据>
+1.2：取出数据：
+<变量>[, ok] = <- <channel 变量名称>
+
+操作2：
+2.1 遍历 channel
+channel只能通过for range遍历。
+
+注意：
+如果channel没有关闭，并且没有其他goroutine能够向channel添加数据，则在range取出所有数据后会报错
+
+用法：
+for [v := ] range <channel变量名称>{
+......
+}
+
+操作3：
+3.1 关闭channel
+关闭后的channel无法再装入数据，可以继续取数据，直到channel为空。
+
+用法：
+close(<channel变量名称>)
+
+操作4：
+4.1 选择channel
+在多个channel中选择一个准备好的channel分支，从中取数据并执行对应的分支。
+当没有准备好的channel时，程序阻塞并等待。
+
+用法：
+select{
+case data := <-ch1: //可以时入数据，也可以是出数据
+//do something 1
+case data := <-ch2:
+// do something 2
+default: // 根据实际场景确定是否使用default
+// do something else
+}
+
+21:30 生产者和消费者模型
+
+21：36 有向channel （用于精确控制）
+有向channel表示channel是一个定向channel，数据只能进，或只能出。
+有向channel通常用在参数中，以限制方法对channel的使用范围。
+
+表示方法：
+var <channel name> chan <- : 单向，只能进数据或关闭
+var <channel name> <- chan : 单向，只能出数据
+
+21：41 channel的注意事项 
+1. 没有缓冲区的channel在没有可用的接收者时，程序等待
+2. channel不能重复关闭
+3. 关闭后的channel不能再向里边装数据，但可以继续取。
+4. 非多线程的程序中，谨慎使用channel
+5. Select再选择channel时，如果多个channel都准备好了，他会随机选择一个，而不是从上到下。
+

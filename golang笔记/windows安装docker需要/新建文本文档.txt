@@ -1,0 +1,6 @@
+hyper是windows功能 上没有hyper时，额外运行的。（如果有hyper就忽略）
+
+安装好docker后，如果弹出WSL 2 installation is incomplete. 
+wsl2 安装地址：https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+（要最新的）
+文件中wsl_updata_x64.msi是用来更新WSL2的，是目前最新的版本。

@@ -1,0 +1,204 @@
+第二课
+goland中
+alt+shift 竖向选
+
+格式化输出：http://doc.golang. ltd
+%s, %b, %f, %v, %t, %%, %q ...
+
+第三课
+9：38
+tab和空格的展示
+preferences
+white
+
+伪代码
+1.计算bmi
+1.1
+1.2
+1.3
+2.计算体脂
+2.1
+2.2
+3.判断体制
+3.1
+3.2
+
+c.xxxx + (b.控制+（a.基本体制器）)  然后优化
+
+第4次课
+19:55前几分钟，设置字体大小
+setting -- editor -- general -- mouse control - change font size with Ctrl+Mouse Wheel in 
+20:12 ASCII
+20:15 rune
+20:32 哪里容易出错？
+20:52 map的黑盒子是什么 interface{}
+21：05map注意事项： ppt有
+21：38 重构
+
+
+第五节课
+20：20 goland的技巧  alt+鼠标点击：可以产生多个光标位置，方便同时改多个。 alt+shift+鼠标拖 ：可以产生连续的光标位置，方便多行改动
+20：41 if !cont{ break}
+20：44 goland重构
+refactor -- extract method
+refactor -- rename
+20：48 goland双击terminal窗口可以最大化
+20：58 左侧锁的图标，快速定位函数。打开锁有什么作用？
+21：00 todo和fixme
+21：03 goland实现函数或方法 。如：先写了一个函数，还没有写函数内部。这时，generate -- implement method -- create
+快捷键：光标放在还没有实现的函数名上，alt + enter  -- 创建函数   ：就会自动创建好函数及格式，我们只需要完善函数体即可。
+21：07 go内置函数：
+close： 管道关闭
+len、 cap： 返回数组、切片、map的长度或容量
+new、 make： 内存分配 
+copy、 append: 操作切片
+print、 println: 打印
+complex、 real、 imag:操作复数
+21：12 指针 new创建指针类型
+21：25 defer   即使程序panic，defer还是会执行。
+21：26 ： 不定长参数：
+21：30 ： 不定长的用法，传入不定长参数
+slice1 := [ ]int{1, 2, 3}
+func1( slice1... ) { } 传入这个参数，slice1... 就是把切片展开，然后传给函数的。
+21：33 ：命名返回值
+21：41 ：把函数作为参数  该函数叫回调函数
+例如：
+func getFinalFatState(age int, fatRate float64, calcFunc func(age int, fatRate float64)string) string{
+	return calcFunc(age, fatRate)
+}
+外层函数先称为大函数，参数函数先称小函数。
+扩展疑问，该参数函数中的参数，是不是需要在外边同意设置成参数。 如age 是参数函数中的参数，age是不是必须成为大函数的参数？
+
+21：52 ： 把函数作为返回值 没太懂
+21：59：init函数： 可以定义很多个init函数。 是完全自动调用的。从上到下运行。在mian函数之前，运行。
+一般用于初始化，设置一些值。保证程序或特定的包正常运行。
+
+钉钉中：
+一行中，删除光标后的内容：shift+end， 然后删除
+一行中，删除光标前的内容：shift+home, 然后删除
+
+ppt补充
+函数变量在赋值时有条件：
+1. 变量类型不能改变
+2. 变量定义后必须使用。普通函数可以单独存在而不必使用。但函数变量定义后必须使用。
+3. 变量类型在赋值过程中，函数的形式参数、返回值必须一致。
+
+init函数
+init函数是在包被引用时用于包初始化的函数。
+特殊点：
+1. 不需要，也不可以被调用。Golang默认自动执行。
+2. 一个Go文件、包中可以有多个init函数。
+
+第六课
+19：05 作用域  重点 {。。。 }
+注意：{}内是否有 := 定义同名变量，要注意。
+注意：全局变量的使用。 有全局变量，如果这时函数内有同名 变量，同时用了:= ，该变量在函数内就是局部变量。要注意，不要搞乱了。
+
+19：40 递归
+注意：要有结束条件，否则没法停止。
+
+20：17闭包
+返回值是函数，该返回值函数与大函数，有部分共同的内容。
+
+想一想：返回值的函数其实就会很灵活。 可以用很多种返回值函数。例如：登录是以微信、微博，或得到登录？
+调用微信、微博，或得到相应的函数即可。
+
+
+20：33 defer
+defer是golang内置的函数，在函数运行结束时执行。
+重点：defer定义的函数，关注在最后一层函数体。
+
+已经计算好，只是在最后放出来
+
+20：49 panic
+panic是golang内置的函数，用于处理严重错误，使当前运行函数直接异常退出。
+如果异常退出没有被捕获，则会持续向上递进，直到有捕获的地方，或main函数退出。
+
+重点：
+1. golang内置了多种panic。如：nil pointer, index out of range, concurrent read/write， map 等。
+2. panic 也可以主动通过调用panic函数抛出。例如：
+if i<=0{
+panic("主动panic的原因。。。")
+}
+
+20：52 recover
+截获panic
+
+recover是golang内置的函数，用于捕获严重错误。它通常位于defer引入的函数体中，用于捕获正在运行的函数中出现的严重错误。
+
+重点：defer 的 recover只能处于当前函数的调用栈中。如果脱离了当前函数的调用栈，recover无法捕获。
+
+defer func(){//recover一定要在defer之中
+	if r := recover(); r != nil{ //r 就是recover捕获的东西
+		fmt.Println("系统出现严重故障“)
+	}
+}（）
+
+defer后的函数，如果带参数，参数得准备好。如果参数是某些函数的返回值，要注意，该参数在defer时是不是已经准备好的，或是不是想要的。
+
+21：00 中断
+
+21：10 debug
+
+21：12 包
+21：30 goland ctrl+shift + -  把代码缩起来
+21：31 goland 分块
+21：39 go module
+21:53 扩展包（把别的包扩展到当前包） 慎用。如：
+impor（ . fmt） //就是把fmt包的内容全扩展到当前包下，以前使用fmt.Println("XXX") ，现在直接 Println("XXX")。
+但要注意：
+1. 同一个包中函数名称、变量名称不能重名。
+2. 扩展包中的函数不可控。
+
+21：58 必须起别名
+引用包的时候，引用的多个包的名称会相同，这时需要使用别名来进行区分。例如：
+import(
+c01  "c1.calc"//calc包名一样，用起别名加以区分。
+c02  "c2.calc"
+)
+
+遇到go run  不起来（可能是引用了main.go以外的包），弹出configuration（用来配置运行范围），参考以下链接：
+https://www.cnblogs.com/zexin88/p/15308893.html
+
+通过configuration配置，让编译的范围包含住要引用的包。configuration还有高级用法，慢慢体会和积累。
+
+第七课
+8：26 注意包名
+
+8：27 go module
+Go Module 是 Golang官方提供的依赖管理方案。
+一个Go Module 代表一个独立的、可使用的模块。
+
+module learn.go
+go 1.17
+
+
+8:38 cobra 命令行工具
+github.com/spf13/cobra
+go mod tidy 刷新go.mod文件
+go.mod右键，选go mod tidy
+
+8：43 干个个啥？
+21：00问答解决
+setting - Go - go module -environment 用阿里云
+将以下粘贴进Environment：
+GOPROXY=https://mirrors.aliyun.com/goproxy
+然后就可以go mod tidy
+
+21：04 go module进阶
+不在gopath下
+21：14 创建mod
+项目目录的终端： go mod init
+
+21：23 是啥？
+21：26 碰门
+21:32 vendor
+快照
+go module 深度支持vender，通过命令行go mod vendor 将项目的依赖保存到vendor中。
+每次有新引用的第三方包，就要使用一次go mod vendor 更新。
+
+
+
+钉钉群：
+助教关于格式：
+https://github.com/uber-go/guide/blob/master/style.md

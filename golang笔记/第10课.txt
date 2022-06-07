@@ -1,0 +1,90 @@
+回看异常处理 err panic recover
+测试 debug、 TDD、 fake输入
+
+19：10 指针
+没有指向实际值的指针就是空指针。空指针不能直接使用。需要实例化。
+19：15什么情况下会用到指针
+19：30  指针可以指向任何变量，但是不能指向常量。
+19：41 例子 
+var nothing *int 这个指针没有指向任何变量。无法使用。 所以引用类型一定要实例化。
+*nothing = 3
+fmt.Println(*nothing)  // invalid memory address or nil pointer dereference
+
+切片是特殊的，在没有初始化的情况下，也可以append进数据。
+19：45 指针不支持运算
+19：47 对象（结构体）
+如果这个对象数据复杂（类型复杂），需要使用对象，并针对他做函数。
+
+19：59面向对象编程（4句话）
+通过接口
+
+type Person struct{
+...
+}
+高内聚 低耦合
+
+
+20：11 什么是结构体
+结构体的成员函数， go中叫方法
+
+
+
+最后完整的回归性测试
+
+20：34跳闸 定义结构体对象
+不要偷懒，要规范。
+new方法 new出来的是指针类型
+a := new(Person)
+b := &Person{} b是指向Person结构体的指针
+这两个等价的
+
+20：40 结构体属性
+成员变量
+成员函数：方法
+func(c calculation) Add() int{
+return c.a+c.b
+}
+小知识点：成员函数，可以在同一个包的不同文件中。
+20：47 goland用了什么？
+
+20：48 结构体的操作
+结构体的属性在同一个包内都可见。
+
+20：57 注意：结构体方法调用时结构体的地址变化了。
+只能通过指针改变结构体内的值。
+
+
+21：09 继承 结构体嵌套
+直接嵌入其他结构体完成结构体的定义。
+指针对象，或其他引用类型，不会自动实例化，
+实例化（初始化）
+
+21：39 实例
+
+
+21：49 fake 
+
+不懂：
+1. newCalculator结构体 嵌套的结构体如果是指针类型会怎样。要看看。没注意，没理解。
+type NewCalculator struct{
+	Calculator //嵌套了正常的结构体
+}
+初始化： newC := NewCalculator{} 即可
+直接可以使用继承等操作
+
+type NewCaculator struct{
+	*Calculator //嵌套了指针类型的结构体
+}
+初始化且必须实例化：newC := NewCalculator{ &Calculator{}}
+然后就可以使用继承，等操作了。
+
+也就是说，如果struct中有需要实例化的变量，在初始化的时候，必须将引用类型的变量都实例化后，才可以正常使用。
+2. 
+type MyCommand struct {
+	mainCommand    *string //这是什么意思？？？使用时需要实例化，且必须指向一个实体。空的*string是没法用的。
+	commandOptions map[string]string
+}
+
+抄课件ppt
+
+golang ：看函数方法：右键go to --> declaration or usages
