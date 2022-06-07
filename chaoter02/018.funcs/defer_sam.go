@@ -19,7 +19,7 @@ func deferGuess() {
 
 func openFile() {
 	fileName := "/"
-	fileObj, err := os.Open{fileName}
+	fileObj, err := os.Open(fileName)
 	if err != nil {
 		fmt.Println("error:", err)
 		os.Exit(1)

@@ -56,4 +56,4 @@ replace learn.go/zuoye/bfr_rely_on/bmi => ./github.com/!zegele/learn.go@v0.0.0-2
 
 replace github.com/armstrongli/go-bmi => ./staging/src/github.com/armstrongli/go-bmi
 
-replace github.com/docker/docker@v20.10.16+incompatible => ./github.com/docker/docker
+//replace github.com/docker/docker@v20.10.16+incompatible => ./github.com/docker/docker
