@@ -22,19 +22,19 @@ gRPC是一个现代化的高性能的RPG框架，它可以灵活的运行在各�
 同时，它通过丰富的插件来扩展支持负载均衡、跟踪、健康检查、认证等等。
 gRPC通过protobuf来定义模型、接口，并通过自动化工具生成go代码。
 
-protoc --go_out=.--plugin=types.proto
-protoc-go-inject-tag-input="*.pb.go"
+protoc --go_out=.--plugin=types.proto  //自动生成types.proto文件
+protoc-go-inject-tag-input="*.pb.go" // 注入字节，如gorm的tag（标签）
 
 20:38
 gRPC 可以通过service来定义服务接口，从而实现像在客户端调用接口一样调用服务端接口，完成远程调用与交互。
 
-注册一个服务器
-service GetPersonalInfo{
+注册一个服务
+service GetPersonalInfo{ // service 是个服务，是相互通信的接口。
 	rpc Register(PersonalInformation)returns(PersonalInformation){}
 }
 
 命令行：
-protoc -I . --go_out=plugins=grpc:. *.proto
+protoc -I . --go_out=plugins=grpc:. *.proto //自动生成grpc的golang代码 
 
 我输入该命令报错，如下：
 --go_out: protoc-gen-go: plugins are not supported; use 'protoc --go-grpc_out=...' to generate gRPC
@@ -61,9 +61,12 @@ gRPC除了支持单次调用外，还可以支持双方互相通信：
 
 21:14 stream
 流
+
+
 service GetPersonalInfo{
 rpc Register(PersonalInformation) returns(PersonalInformation){}
 rpc RegisterPersons(stream PersonalInformation) returns (PersonalInformations){}
+// 多次请求，单次答复
 }
 
 命令行：
