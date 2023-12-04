@@ -10,7 +10,7 @@ type Interface interface {
 	ReadPersonalInformation() (apiss.PersonalInformation, error)
 }
 
-var _ Interface = &FakeInterface{}
+//var _ Interface = &FakeInterface{}
 
 type FakeInterface struct {
 	Name       string
@@ -31,9 +31,9 @@ func (f *FakeInterface) ReadPersonalInformation() (apiss.PersonalInformation, er
 	pi := apiss.PersonalInformation{
 		Name:   f.Name,
 		Sex:    f.Sex,
-		Tall:   f.BaseTall,
-		Weight: f.BaseWeight, //f.BaseWeight都是指针内存的值
-		Age:    f.BaseAge,
+		Tall:   float32(f.BaseTall),
+		Weight: float32(f.BaseWeight), //f.BaseWeight都是指针内存的值
+		Age:    int64(f.BaseAge),
 	}
 	f.BaseWeight += out // 修改了指针内存的值。
 	return pi, nil

@@ -35,7 +35,8 @@ func writeFile(filePath string) {
 }
 
 func writeFileWithAppend(filePath string) {
-	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0777) //创建一个文件
+	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0777) //linux file permission settings
+	// 创建一个文件
 	if err != nil {
 		fmt.Println("无法打开文件：", filePath, "错误信息是：", err)
 		os.Exit(1) //如果程序正常退出，Exit内的值是0，如果不是正常退出，给一个非0的数。

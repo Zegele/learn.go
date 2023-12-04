@@ -108,6 +108,10 @@ func testDbConnection(err error, learnDB *sql.DB) error {
 func getDbConnection() (*sql.DB, error) {
 	learnDB, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/testdb") //最后一个是数据库名
 	//用户名 ： 密码 @tcp(本机地址：端口)/数据库名
+	//第一个参数是驱动名称，字符串类型。为避免混淆，一般与包名相同
+	//第二个参数也是字符串，内容依赖于特定驱动的语法。通常是URL的形式，例如postgres://localhost:5432
+	//绝大多数情况下都应当检查database/sql操作所返回的错误。
+	//一般而言，程序需要在退出时通过sql.DB的Close()方法释放数据库连接资源。如果其生命周期不超过函数的范围，则应当使用defer db.Close()
 	if err != nil {
 		log.Fatalf("链接数据库失败：%v", err)
 	}

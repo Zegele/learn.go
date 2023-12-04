@@ -18,6 +18,7 @@ func TestDefChannel(t *testing.T) {
 	fmt.Println("装入数据")
 	intCh <- 3
 	fmt.Println("取出数据")
+
 	out := <-intCh
 	fmt.Println("取出的数据是：", out)
 }
@@ -142,7 +143,7 @@ func TestChanPutGet2_OFirst_withBuffer(t *testing.T) {
 	time.Sleep(1 * time.Second)
 }
 
-//遍历channel
+// 遍历channel
 // range 没有 close 的话，在去除所有数据后，panic deadlock
 func TestRangeChannel(t *testing.T) { //遍历channel
 	intCh := make(chan int, 10) //创建一个带size的channel（带buffer）

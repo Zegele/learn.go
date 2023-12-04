@@ -21,7 +21,7 @@ func main() {
 	var port string                                 // port（端口）
 	flag.StringVar(&port, "port", "8080", "配置启动端口") // 什么意思？？？ 给参数port赋值 默认8080
 	// ./server --port=8081 设置端口的命令参数
-	flag.Parse() //把端口绑进去
+	flag.Parse() //把端口绑进去 // 就是按上面的样式，可以更换端口，如果不更换，就默认是8080端口
 
 	//	ln, err := net.Listen("tcp", ":8080") //tcp: Transfer Control Protocol 传输控制协议; 只有8080端口
 	ln, err := net.Listen("tcp", ":"+port) //tcp: Transfer Control Protocol 传输控制协议; tcp+端口号。

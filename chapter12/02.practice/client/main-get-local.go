@@ -19,7 +19,7 @@ func (f frClient) register() {
 	pi, _ := f.handRing.ReadPersonalInformation() // 创建了person信息
 	data, _ := json.Marshal(pi)
 	r := bytes.NewReader(data)
-	resp, err := http.Post("http://localhost:8080/register", "application/json", r)
+	resp, err := http.Post("http://localhost:8080/register", "application/json", r) //contentType: application/json是要按照json格式Post
 	if err != nil {
 		log.Println("WARNING: register fails:", err)
 		return

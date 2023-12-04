@@ -12,6 +12,7 @@ func main() {
 		// 服务器从request中读取数据
 		data, _ := json.Marshal(qp)
 		writer.Write([]byte("hello,您好：" + string(data)))
+
 		// 服务器从writer中写出数据
 
 		// 浏览器内输入 http://localhost:8088/?name=xiao,sex=男

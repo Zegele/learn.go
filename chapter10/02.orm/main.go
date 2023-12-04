@@ -100,7 +100,7 @@ func creatNewPerson(conn *gorm.DB) error {
 	return nil
 }
 
-//更新
+// 更新
 // 全覆盖模式更新
 func undateExistingPerson(conn *gorm.DB) error {
 	resp := conn.Updates(&types.PersonalInformation{
@@ -131,6 +131,7 @@ func undateExistingPersonSelectFields(conn *gorm.DB) error {
 		//	Age:    30,
 	}
 	resp := conn.Model(p).Select("name", "tall").Updates(p) // 表示 把p结构体中的，name和tall，更新回p
+	//Model(p)指定更新p，Select("name", "tall")是选择p的name和tall字段，Updates(p)是更新回p
 	if err := resp.Error; err != nil {
 		fmt.Println("更新***人时失败：", err)
 		return err
@@ -141,7 +142,7 @@ func undateExistingPersonSelectFields(conn *gorm.DB) error {
 
 // 删除
 func deletePerson(conn *gorm.DB) error {
-	p := types.PersonalInformation{ID: 6}
+	p := types.PersonalInformation{ID: 6} // 通过primary key 删除
 	resp := conn.Delete(p)
 	if err := resp.Error; err != nil {
 		fmt.Println("删除**人时失败：", err)

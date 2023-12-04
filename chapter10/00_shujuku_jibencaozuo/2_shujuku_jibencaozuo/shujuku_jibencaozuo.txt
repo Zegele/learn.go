@@ -1,0 +1,60 @@
+24、18：18
+每种数据库都有自己的数据库定义语言（DDL）。比如：创建表，修改表，添加索引等。
+大部分数据库兼容相同的数据操作语言（DML）。比如增删更查
+SELECT 查； INSERT 增； UPDATE 更； DELETE 删  sql语言
+
+1： SELECT
+SELECT <column name>,<column name>,<column name> FROM<real or virtual table> WHERE <column name>    >、 <、 =、   <>   '<value>';
+                                                                                                   大于 小于 等于 不等于 字符串要用单引号
+SELECT * FROM personal_info; // 查看personal_info表的所有数据
+      所有
+
+SELECT name FROM personal_info; // 查看personal_info表的name字段的数据
+
+SELECT id, name, name FROM learngo.personal_info where id <= 3;
+SELECT id, name, name FROM learngo.personal_info where id <> 3; //不等于3
+SELECT * FROM learngo.personal_info where sex = '男'; // 字符串用单引号包起来
+
+SELECT * FROM learngo.personal_info where sex <> '男' and name > '1';
+
+左边的”闪电“执行所有的，有边的“闪电”执行一行
+
+-- 表示注释，示例：
+ELECT * FROM personal_info -- all date  // -- 后面的不会执行。
+
+
+order by <colume name>  // 对字段排序 asc 从小到大排; desc从大到小排
+示例：
+SELECT * FROM learngo.personal_info where sex <> '男' and name > '1' order by tall desc;
+//对找到的数据，按照tall字段，从大到小排列
+
+limit // 对数据进行限制
+示例：
+SELECT * FROM learngo.personal_info where sex <> '男' and name > '1' order by tall desc limit 5;
+//对找到的从大到小排列的数据，只要前5行。
+
+offset //设置开始的位置
+示例：
+SELECT * FROM learngo.personal_info where sex <> '男' and name > '1' order by tall desc limit 5 offset 4;
+// 对找到的从大到小的数据，设置从第4个开始向后（下）找，找5个，这5个就是需要的数据。
+
+另外还有关联功能，拓展学习
+
+25：00 INSERT
+INSERT INTO <real table> [(<column name>,<column name>) VALUES (<column value>,<colume value>)];
+示例：
+insert into personal_info(name, sex, tall, age) value ('xiaoqiang', '男', 1.78, 33);
+id不用管，主键选了自动增长。当然也可以设定。
+
+29：11 UPDATE
+UPDATE <real table> SET <column name> = <colume value> [WHERE <column name> = <column value>];
+示例：
+update personal_info set tall = 1.71 where id = 1;
+注意！！！一定要注意用where，否则改变所有人的tall数据。
+
+33：00 DELETE
+DELETE FROM <real table> [WHERE <column name> = <column value>];
+示例：
+delete from personal_info where id = 7;
+注意！！！ where一定要配置正确，否则都删除了。
+

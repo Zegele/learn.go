@@ -46,24 +46,30 @@ func talk(conn net.Conn, rank *rank.FatRateRank) {
 		encounterError := false
 		for {
 			buf := make([]byte, 1024)
-			valid, err := conn.Read(buf) //读取
+			valid, err := conn.Read(buf) //读取  它不会读取个valid=0出来 // 如果没有要读取了东西了，还要给“空东西”给它读取，它就一直卡这里
+			// 不能给它“空东西”，让它读取“空东西”
+
 			if err != nil {
+				fmt.Println("读到几个：", valid)
 				log.Println("WARNING:读取数据时出问题：", err)
 				log.Println("重新读取：", err)
 				encounterError = true
 				time.Sleep(1 * time.Second)
 				break
 			}
-			if valid == 0 { //等于0说明读完了，没有要读的数据了。取到完整的数据了。
-				break
-			}
+
 			validCountent := buf[:valid]
 			finalReceivedMessage = append(finalReceivedMessage, validCountent...)
 
-			if valid < len(buf) {
+			//if valid == 0 { //等于0说明读完了，没有要读的数据了。取到完整的数据了。
+			//	break
+			//}
+			if valid < len(buf) { //valid小于len(buf)就说明已经全读取完了，就可以退出循环了。
 				break
 			}
+
 		}
+		fmt.Println("到这了？")
 		if encounterError {
 			conn.Write([]byte(`服务器获取数据失败，请重新输入`)) // handle error
 			continue

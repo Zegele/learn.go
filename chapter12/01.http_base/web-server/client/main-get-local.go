@@ -15,12 +15,14 @@ func main() {
 	defer cancel()
 	go httpDirectGet()
 	go httpGetWithContext(ctx)
-	<-ctx.Done() //等着结束
-	//作用是什么？
+	<-ctx.Done() //等着接收ctx结束的信号
+	//作用是什么？表示收到ctx结束的消息，并写出。
+	//如果不写这个会怎样？
+
 }
 
 func httpDirectGet() {
-	resp, err := http.Get("http://localhost:8088")
+	resp, err := http.Get("http://localhost:8088?123456=456789")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -16,6 +16,6 @@ func main() {
 		log.Fatal(err)
 	}
 	defer resp.Body.Close()
-	data, err := ioutil.ReadAll(resp.Body)
+	data, err := ioutil.ReadAll(resp.Body) //这是response Body
 	fmt.Println("resp:", string(data))
 }

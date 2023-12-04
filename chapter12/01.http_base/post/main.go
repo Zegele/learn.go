@@ -9,7 +9,10 @@ import (
 )
 
 func main() {
-	r := strings.NewReader("foooooooo")                       //strings包要看看
+	r := strings.NewReader("foooooooo") //strings包要看看
+	//要Reader类型的数据  把字符串，通过strings.NewReader变成了Reader类型
+	//bytes.NewReader([]byte(`你好`)) // 把[]byte变成Reader类型
+
 	resp, err := http.Post("https://www.baidu.com", "*/*", r) //contentType种类很多。 */*表示不管是什么都接受。
 	if err != nil {
 		log.Fatal(err)

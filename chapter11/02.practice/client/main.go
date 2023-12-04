@@ -28,7 +28,7 @@ func main() {
 			defer conn.Close()
 			fmt.Println("连接成功，开始发送数据：")
 			pi, err := input.ReadPersonalInformation()
-			fmt.Println(pi.Weight)
+
 			if err != nil { //说明没读取到
 				log.Println("WRANING:读取失败，请重新录入：", err)
 				return
@@ -53,6 +53,7 @@ func talk(conn net.Conn, message string) { //发送message，并获得返回信�
 	} else {
 		data := make([]byte, 1024)
 		validLen, err := conn.Read(data) // 收到（读取）服务端的回应
+		fmt.Println("???")
 		if err != nil {
 			log.Println("WATNING:读取服务器返回数据时出错：", err)
 		} else {

@@ -8,7 +8,8 @@ import (
 )
 
 func main() {
-	resp, err := http.Get("http://www.baidu.com") //填网址
+	//resp, err := http.Get("http://www.baidu.com") //填网址
+	resp, err := http.Get("http://localhost:8080") //填网址
 	// resp 是访问网址返回的数据（是个结构体类型）
 	if err != nil {
 		log.Fatal(err)

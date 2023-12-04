@@ -52,7 +52,7 @@ func main() {
 
 	// terminal
 	//第7课时间50：08
-	// go run ./main.go --help  // 可以看到可用的命令
-	// go run ./main.go --age 30 --name xiaoqiang --weight 65 // 则可以执行相应的命令
+	// go run ./session.go --help  // 可以看到可用的命令
+	// go run ./session.go --age 30 --name xiaoqiang --weight 65 // 则可以执行相应的命令
 
 }

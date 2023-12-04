@@ -1,8 +1,13 @@
-syntax = "proto3";
+syntax = "proto3"; //指定使用 proto3 语法
 
-package apis;
+package apis; //该proto文件所在的包
 
-option go_package = "../apis";
+option go_package = "../apis"; //前一个参数用于指定生成文件的位置，后一个参数指定生成的 .go 文件的 package 。
+//option go_package = "../apis;api"; //前一个参数用于指定生成文件的位置，后一个参数指定生成的 .go 文件的 package
+// 第一个参数不一定要绝对路径
+
+//import "xxx"    该proto 文件内 import（引用） 其他.proto文件的路径
+// xxx是相对路径,使用protoc -I 搜索.proto文件路径，获得路径，把该路径放入import // readme 36行也有另一种做法。
 
 message PersonalInfomationList{
   repeated PersonalInfomation items = 1;//重复 这就是切片类型？
